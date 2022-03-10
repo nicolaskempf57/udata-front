@@ -42,6 +42,7 @@ setup(
     entry_points={
         'udata.themes': [
             'gouvfr = udata_front.theme.gouvfr',
+            'gouvtst = udata_front.theme.gouvtst',
         ],
         'udata.models': [
             'front = udata_front.models',
