@@ -1,5 +1,6 @@
 <template>
-    <div class="fr-grid-row fr-grid-row--middle flex-sm dash-after text-grey-500 not-enlarged">
+    <div class="fr-grid-row fr-grid-row--middle flex-sm text-grey-500 not-enlarged">
+        <div class="fr-grid-row fr-grid-row--middle fr-ml-n1v">
         <ToggleTip
             class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-icon-info-line"
         >
@@ -56,7 +57,7 @@
                 />
                 <div class="fr-grid-row fr-grid-row--right not-enlarged">
                     <a
-                    :href="guides_quality_url"
+                    :href="config.guides_quality_url"
                     target="_blank"
                     rel="noopener"
                     :title="$t('Learn more about this indicator - opens a new window')"
@@ -69,8 +70,82 @@
         <p class="fr-m-0 fr-mr-1v">
             {{$t('Metadata quality:')}}
         </p>
-        <div class="fr-grid-row fr-grid-row--middle fr-mr-1v">
-            <QualityScore :score="quality.score"/>
+        </div>
+        <QualityScore :score="quality.score"/>
+        <div v-if="!quality.dataset_description_quality" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p
+                class="fr-my-0 fr-text--sm"
+            >
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{$t("Data description empty")}}
+            </p>
+        </div>
+        <div v-if="!quality.resources_documentation" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p
+                class="fr-my-0 fr-text--sm"
+            >
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{$t("Files documentation missing")}}
+            </p>
+        </div>
+        <div v-if="!quality.update_frequency && quality.update_fulfilled_in_time" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p
+                class="fr-my-0 fr-text--sm"
+            >
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{
+                quality.update_frequency
+                    ? $t("Update frequency not followed")
+                    : $t("Update frequency not set")
+                }}
+            </p>
+        </div>
+        <div v-if="!quality.has_open_format" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p class="fr-my-0 fr-text--sm">
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{$t("File formats are closed")}}
+            </p>
+        </div>
+        <div v-if="!quality.temporal_coverage" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p class="fr-my-0 fr-text--sm">
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{$t("Temporal coverage not set")}}
+            </p>
+        </div>
+        <div v-if="!quality.spatial" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p class="fr-my-0 fr-text--sm">
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{$t("Spatial coverage not set")}}
+            </p>
+        </div>
+        <div v-if="!quality.all_resources_available" class="text-default-warning fr-grid-row fr-grid-row--middle fr-m-1v">
+            <p
+                class="fr-my-0 fr-text--sm"
+            >
+                <span
+                class="fr-icon-warning-line fr-icon--sm"
+                aria-hidden="true"
+                ></span>
+                {{$t("Some files are unavailable")}}
+            </p>
         </div>
     </div>
 </template>
@@ -79,20 +154,9 @@
 import { QualityScore}  from '../QualityScore/';
 import { QualityItem } from '../QualityItem/';
 import { ToggleTip } from '../ToggleTip/';
+import { config } from '../../config';
+import type { Quality } from '../../types/datasets';
 defineProps<{
-    quality: {
-        all_resources_available: boolean,
-        dataset_description_quality: boolean,
-        has_open_format: boolean,
-        has_resources: boolean,
-        license: boolean,
-        resources_documentation: boolean,
-        score: number,
-        spatial: boolean,
-        temporal_coverage: boolean,
-        update_frequency: boolean,
-        update_fulfilled_in_time: boolean,
-    },
-    guides_quality_url: string
+    quality: Quality
 }>();
 </script>

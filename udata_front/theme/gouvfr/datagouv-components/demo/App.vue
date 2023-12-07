@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ResourceAccordion, QualityComponent, QualityItem, QualityScore, ToggleTip } from "../src";
+import { ResourceAccordion, QualityComponent, QualityItem, QualityScore, ReadMore, ToggleTip } from "../src";
 import { ref } from "vue";
 import type { Resource } from "../src";
 
@@ -78,20 +78,19 @@ test.. test... test..... test?..... test!....
     url: "https://static.data.gouv.fr/resources/indice-de-reparabilite-organisation-ribimex/20231115-104022/data.csv"
   });
   const quality = {
-        all_resources_available: true,
-        dataset_description_quality: true,
-        has_open_format: true,
-        has_resources: true,
-        license: true,
-        resources_documentation: true,
+        all_resources_available: false,
+        dataset_description_quality: false,
+        has_open_format: false,
+        has_resources: false,
+        license: false,
+        resources_documentation: false,
         score: 0.9,
-        spatial: true,
+        spatial: false,
         temporal_coverage: false,
-        update_frequency: true,
-        update_fulfilled_in_time: true,
+        update_frequency: false,
+        update_fulfilled_in_time: false,
     };
     const id = "12";
-    const guides_quality_url = "string";
 </script>
 
 <template>
@@ -113,6 +112,12 @@ test.. test... test..... test?..... test!....
   </ToggleTip>
   <QualityComponent 
     :quality="quality"
-    :guides_quality_url="guides_quality_url"
   ></QualityComponent>
+  <ReadMore>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquet, justo vitae facilisis lobortis, turpis velit suscipit urna, vel rutrum arcu lacus vitae felis. Proin ac orci et tellus auctor sodales. Cras eleifend a lacus tempor tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer mi urna, tempor vel feugiat eget, aliquet quis eros. Sed nisi tortor, fringilla vitae orci vel, faucibus imperdiet mauris. Maecenas nunc eros, dapibus vitae orci ut, semper ultricies sem.
+
+    Pellentesque nulla ex, condimentum quis urna quis, ultrices vehicula risus. Duis facilisis nisl massa, et consequat nisi tristique ultricies. Praesent aliquam bibendum urna, non fermentum augue tempor ac. Sed tincidunt nibh sapien, a posuere risus mollis sit amet. Cras lorem massa, fringilla pulvinar dapibus ac, pharetra eu enim. Nam arcu ante, consequat vitae ultricies non, posuere vitae quam. Etiam imperdiet, ligula non venenatis suscipit, dolor leo mattis quam, dignissim sodales tortor felis vitae turpis. Ut sed congue tellus, fringilla scelerisque leo. Fusce viverra varius convallis. Aliquam faucibus odio nunc, malesuada gravida sem gravida sed. Vivamus sollicitudin dolor euismod libero aliquam, at cursus sapien auctor.
+
+    Ut augue orci, malesuada mollis ex at, accumsan rutrum risus. Nulla semper mauris massa, sed luctus dui suscipit lacinia. Sed faucibus pulvinar odio. Praesent sit amet ipsum ultricies, pretium orci non, interdum ipsum. Ut tincidunt molestie pulvinar. Ut a imperdiet erat, id euismod sapien. Vivamus quis purus sodales dui tempus pellentesque ultricies ultrices sem.</p>
+  </ReadMore>
 </template>

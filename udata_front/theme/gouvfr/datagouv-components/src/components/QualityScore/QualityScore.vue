@@ -1,11 +1,10 @@
 <template>
-    <meter class="quality-score" min="0" low="0" :high="high" :max="quality_max_score" :optimum="quality_max_score" :value="score">
+    <meter class="quality-score w-100" min="0" low="0" :high="high" :max="quality_max_score" :optimum="quality_max_score" :value="score">
         {{score}}/{{quality_max_score}}
     </meter>
 </template>
 
 <script setup lang="ts">
-
 defineProps<{
     score: number
 }>();

@@ -4,5 +4,6 @@ import { QualityItem } from "./QualityItem";
 import { QualityScore } from "./QualityScore";
 import { ToggleTip } from "./ToggleTip";
 import { QualityComponent } from "./QualityComponent"
+import { ReadMore } from "./ReadMore"
 
-export { OrganizationNameWithCertificate, QualityComponent, QualityItem, QualityScore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
+export { OrganizationNameWithCertificate, QualityComponent, QualityItem, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
