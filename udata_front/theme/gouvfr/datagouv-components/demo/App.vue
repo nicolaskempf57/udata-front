@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ResourceAccordion } from "../src";
+import { ResourceAccordion, QualityComponent, QualityItem, QualityScore, ToggleTip } from "../src";
 import { ref } from "vue";
 import type { Resource } from "../src";
 
@@ -77,6 +77,21 @@ test.. test... test..... test?..... test!....
     organization: null,
     url: "https://static.data.gouv.fr/resources/indice-de-reparabilite-organisation-ribimex/20231115-104022/data.csv"
   });
+  const quality = {
+        all_resources_available: true,
+        dataset_description_quality: true,
+        has_open_format: true,
+        has_resources: true,
+        license: true,
+        resources_documentation: true,
+        score: 0.9,
+        spatial: true,
+        temporal_coverage: false,
+        update_frequency: true,
+        update_fulfilled_in_time: true,
+    };
+    const id = "12";
+    const guides_quality_url = "string";
 </script>
 
 <template>
@@ -85,5 +100,19 @@ test.. test... test..... test?..... test!....
   </h1>
   <ResourceAccordion dataset-id="someId" :resource="resource" :expanded-on-mount="false" />
   <ResourceAccordion dataset-id="someId" :resource="resourceWithoutSchema" :expanded-on-mount="false" />
-
+  <QualityScore :score="0.5"></QualityScore>
+  <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
+  <ToggleTip>
+    Toggle
+    <template #toggletip>
+      <h5 class="fr-text--sm fr-my-0">
+      {{$t("Metadata quality:")}}
+      </h5>
+      <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
+    </template>
+  </ToggleTip>
+  <QualityComponent 
+    :quality="quality"
+    :guides_quality_url="guides_quality_url"
+  ></QualityComponent>
 </template>
