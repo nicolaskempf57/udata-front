@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ResourceAccordion, QualityComponent, QualityItem, QualityScore, ReadMore, ToggleTip } from "../src";
+import { ResourceAccordion, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip } from "../src";
 import { ref } from "vue";
 import type { Resource } from "../src";
 
@@ -80,10 +80,10 @@ test.. test... test..... test?..... test!....
   const quality = {
         all_resources_available: false,
         dataset_description_quality: false,
-        has_open_format: false,
+        has_open_format: true,
         has_resources: false,
         license: false,
-        resources_documentation: false,
+        resources_documentation: true,
         score: 0.9,
         spatial: false,
         temporal_coverage: false,
@@ -99,7 +99,7 @@ test.. test... test..... test?..... test!....
   </h1>
   <ResourceAccordion dataset-id="someId" :resource="resource" :expanded-on-mount="false" />
   <ResourceAccordion dataset-id="someId" :resource="resourceWithoutSchema" :expanded-on-mount="false" />
-  <QualityScore :score="0.5"></QualityScore>
+  <QualityScore :score="0.5" class="w-100"></QualityScore>
   <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
   <ToggleTip>
     Toggle
@@ -113,11 +113,14 @@ test.. test... test..... test?..... test!....
   <QualityComponent 
     :quality="quality"
   ></QualityComponent>
+  <QualityComponentInline
+    :quality="quality"
+  ></QualityComponentInline>
   <ReadMore>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquet, justo vitae facilisis lobortis, turpis velit suscipit urna, vel rutrum arcu lacus vitae felis. Proin ac orci et tellus auctor sodales. Cras eleifend a lacus tempor tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer mi urna, tempor vel feugiat eget, aliquet quis eros. Sed nisi tortor, fringilla vitae orci vel, faucibus imperdiet mauris. Maecenas nunc eros, dapibus vitae orci ut, semper ultricies sem.
 
     Pellentesque nulla ex, condimentum quis urna quis, ultrices vehicula risus. Duis facilisis nisl massa, et consequat nisi tristique ultricies. Praesent aliquam bibendum urna, non fermentum augue tempor ac. Sed tincidunt nibh sapien, a posuere risus mollis sit amet. Cras lorem massa, fringilla pulvinar dapibus ac, pharetra eu enim. Nam arcu ante, consequat vitae ultricies non, posuere vitae quam. Etiam imperdiet, ligula non venenatis suscipit, dolor leo mattis quam, dignissim sodales tortor felis vitae turpis. Ut sed congue tellus, fringilla scelerisque leo. Fusce viverra varius convallis. Aliquam faucibus odio nunc, malesuada gravida sem gravida sed. Vivamus sollicitudin dolor euismod libero aliquam, at cursus sapien auctor.
-
-    Ut augue orci, malesuada mollis ex at, accumsan rutrum risus. Nulla semper mauris massa, sed luctus dui suscipit lacinia. Sed faucibus pulvinar odio. Praesent sit amet ipsum ultricies, pretium orci non, interdum ipsum. Ut tincidunt molestie pulvinar. Ut a imperdiet erat, id euismod sapien. Vivamus quis purus sodales dui tempus pellentesque ultricies ultrices sem.</p>
+  
+    Pellentesque nulla ex, condimentum quis urna quis, ultrices vehicula risus. Duis facilisis nisl massa, et consequat nisi tristique ultricies. Praesent aliquam bibendum urna, non fermentum augue tempor ac. Sed tincidunt nibh sapien, a posuere risus mollis sit amet. Cras lorem massa, fringilla pulvinar dapibus ac, pharetra eu enim. Nam arcu ante, consequat vitae ultricies non, posuere vitae quam. Etiam imperdiet, ligula non venenatis suscipit, dolor leo mattis quam, dignissim sodales tortor felis vitae turpis. Ut sed congue tellus, fringilla scelerisque leo. Fusce viverra varius convallis. Aliquam faucibus odio nunc, malesuada gravida sem gravida sed. Vivamus sollicitudin dolor euismod libero aliquam, at cursus sapien auctor.</p>
   </ReadMore>
 </template>

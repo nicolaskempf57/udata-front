@@ -1,9 +1,11 @@
 import OrganizationNameWithCertificate from "./Organization";
 import { ResourceAccordion, Loader as ResourceAccordionLoader } from "./ResourceAccordion";
 import { QualityItem } from "./QualityItem";
+import { QualityItemWarning } from "./QualityItemWarning";
 import { QualityScore } from "./QualityScore";
 import { ToggleTip } from "./ToggleTip";
 import { QualityComponent } from "./QualityComponent"
+import { QualityComponentInline } from "./QualityComponentInline"
 import { ReadMore } from "./ReadMore"
 
-export { OrganizationNameWithCertificate, QualityComponent, QualityItem, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
+export { OrganizationNameWithCertificate, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
