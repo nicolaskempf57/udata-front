@@ -1,6 +1,7 @@
 import { dayjs } from "./i18n";
 import { useI18n } from "vue-i18n";
 import markdown from "./markdown";
+import RemoveMarkdown from "remove-markdown";
 
 export const filesize = (val: number) => {
   const { t } = useI18n();
@@ -50,5 +51,15 @@ export const formatRelativeIfRecentDate = (date: Date | string) => {
   }
   return formatFromNow(date);
 }
+
+export const truncate = (val: string, length = 300) => {
+  if (typeof val !== "string") return;
+  return val.length > length ? val.slice(0, length) + "…" : val; //TODO, maybe® : properly truncate words
+};
+
+export const excerpt = (val: string, length = 300) => {
+  if (typeof val !== "string") return;
+  return truncate(RemoveMarkdown(val), length);
+};
 
 export { markdown };

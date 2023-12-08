@@ -1,4 +1,4 @@
-import { reactive, readonly, ref } from "vue";
+import { reactive, readonly, ref, _meta } from "vue";
 
 const admin_root = ref(import.meta.env.VITE_ADMIN_ROOT);
 

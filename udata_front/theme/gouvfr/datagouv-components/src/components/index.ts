@@ -1,6 +1,8 @@
 import OrganizationNameWithCertificate from "./Organization";
-import Pagination from "./Pagination";
+import { DatasetCard } from "./DatasetCard";
 import { ResourceAccordion, Loader as ResourceAccordionLoader } from "./ResourceAccordion";
+import Pagination from "./Pagination";
+
 import { QualityItem } from "./QualityItem";
 import { QualityItemWarning } from "./QualityItemWarning";
 import { QualityScore } from "./QualityScore";
@@ -10,4 +12,4 @@ import { QualityComponentInline } from "./QualityComponentInline"
 import { ReadMore } from "./ReadMore"
 import Well from "./Well";
 
-export { OrganizationNameWithCertificate, Pagination, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip, Well };
+export { DatasetCard, OrganizationNameWithCertificate, Pagination, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip, Well };
