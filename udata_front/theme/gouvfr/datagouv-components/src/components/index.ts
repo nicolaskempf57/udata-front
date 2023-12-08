@@ -1,4 +1,5 @@
 import OrganizationNameWithCertificate from "./Organization";
+import { DatasetCard } from "./DatasetCard"
 import { ResourceAccordion, Loader as ResourceAccordionLoader } from "./ResourceAccordion";
 import { QualityItem } from "./QualityItem";
 import { QualityItemWarning } from "./QualityItemWarning";
@@ -8,4 +9,4 @@ import { QualityComponent } from "./QualityComponent"
 import { QualityComponentInline } from "./QualityComponentInline"
 import { ReadMore } from "./ReadMore"
 
-export { OrganizationNameWithCertificate, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
+export { DatasetCard, OrganizationNameWithCertificate, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };

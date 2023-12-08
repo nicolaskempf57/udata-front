@@ -11,3 +11,36 @@ export type Quality = {
     update_frequency: boolean;
     update_fulfilled_in_time: boolean;
 }
+
+export type NewDataset = Owned & {
+    title: string;
+    acronym: string;
+    archived: boolean;
+    description: string;
+    tags: Array<string> | null;
+    license: string;
+    frequency: string;
+    temporal_coverage: string;
+    frequency_date: Date | null;
+    page: string;
+    private: boolean;
+    quality?: Quality;
+    spatial: {
+    zones?: Array<string>;
+    granularity?: string;
+    } | null;
+};
+    
+export type Dataset = NewDataset & {
+    id: string;
+    page: string;
+    resources: Array<Resource>;
+    community_resources: Array<Resource>;
+    created_at: string;
+    last_modified: string;
+    last_update: string;
+    uri: string;
+    slug: string;
+    quality: Quality;
+    metrics: { discussions: number; followers: number; reuses: number; views: number; };
+};
