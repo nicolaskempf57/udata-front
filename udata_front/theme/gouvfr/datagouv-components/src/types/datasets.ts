@@ -1,3 +1,6 @@
+import type { Owned } from "./owned";
+import type { Resource } from "./resources";
+
 export type Quality = {
     all_resources_available: boolean;
     dataset_description_quality: boolean;
@@ -30,7 +33,7 @@ export type NewDataset = Owned & {
     granularity?: string;
     } | null;
 };
-    
+
 export type Dataset = NewDataset & {
     id: string;
     page: string;
