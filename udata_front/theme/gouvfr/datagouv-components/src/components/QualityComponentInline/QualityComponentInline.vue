@@ -1,6 +1,6 @@
 <template>
     <div class="fr-m-0 fr-grid-row fr-grid-row--middle fr-text--sm text-mention-grey">
-        <div class="fr-grid-row fr-grid-row--middle fr-ml-n1v dash-after">
+        <div class="fr-grid-row fr-grid-row--middle fr-ml-n1v">
         <ToggleTip
             class="fr-btn fr-btn--tertiary-no-outline fr-btn--secondary-grey-500 fr-icon-info-line"
         >
