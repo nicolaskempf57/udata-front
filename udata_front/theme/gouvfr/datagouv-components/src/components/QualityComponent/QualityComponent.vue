@@ -103,10 +103,6 @@
         :message="$t('Spatial coverage not set')"
     />
     <QualityItemWarning 
-        :quality-item="quality.temporal_coverage"
-        :message="$t('Temporal coverage not set')"
-    />
-    <QualityItemWarning 
         :quality-item="quality.all_resources_available"
         :message="$t('Some files are unavailable')"
     />
