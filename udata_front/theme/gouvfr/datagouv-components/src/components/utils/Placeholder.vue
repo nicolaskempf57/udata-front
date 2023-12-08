@@ -24,6 +24,7 @@ However, if `src` is undefined, it falls back to a placeholder. Don't forget to 
   
   <script setup lang="ts">
   import { computed } from "vue";
+  import { computedAsync } from '@vueuse/core';
 
   const props = defineProps<{
     type: string,
@@ -32,18 +33,12 @@ However, if `src` is undefined, it falls back to a placeholder. Don't forget to 
     size: number
   }>();
 
-  const placeholderUrl = () => {
-    if (!props.src) {
-        return props.src;
-      } else {
-        const images = import.meta.glob('../img/placeholders/*.png');
-        const keys = Object.keys(images);
-        console.log(keys)
-      }
-    
+  const placeholderUrl = async () => {
+    const module = await import(`../../assets/img/placeholders/${props.type}.png`);
+    return props.src ? props.src : module.default;
   };
 
   const alternativeTextForDefinedImageOnly = computed(() => props.src ? props.alt : '');
-  const path = computed(() => placeholderUrl())
+  const path = computedAsync(() => placeholderUrl())
   </script>
   
