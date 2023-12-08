@@ -92,10 +92,10 @@
 
 <script>
 import { defineComponent } from 'vue';
+import Well from '@etalab/data.gouv.fr-components';
 import ActionCard from '../../components/Form/ActionCard/ActionCard.vue';
 import Stepper from '../../components/Form/Stepper/Stepper.vue';
 import Container from '../../components/Ui/Container/Container.vue';
-import Well from '../../components/Ui/Well/Well.vue';
 import { api_doc_external_link, guides_harvesting_url, schema_publishing_url, support_url, catalog_url, demo_server_name, demo_server_url, title } from "../../config";
 import datasetIcon from "../../../../templates/svg/illustrations/dataset.svg";
 import schemaIcon from "../../../../templates/svg/illustrations/schema.svg";

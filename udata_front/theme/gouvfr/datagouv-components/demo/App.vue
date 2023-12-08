@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Pagination, ResourceAccordion, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip } from "../src";
+import { Pagination, ResourceAccordion, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip, Well } from "../src";
 import { ref } from "vue";
 import type { Resource } from "../src";
+import editIcon from "../../templates/svg/illustrations/edit.svg";
 
 const resource = ref<Resource>({
     checksum: {type: "sha1", value: "54d0f3a4847c546c1cc4865f5ca54a1f8fc3f9af"},
@@ -124,4 +125,18 @@ test.. test... test..... test?..... test!....
 
     Pellentesque nulla ex, condimentum quis urna quis, ultrices vehicula risus. Duis facilisis nisl massa, et consequat nisi tristique ultricies. Praesent aliquam bibendum urna, non fermentum augue tempor ac. Sed tincidunt nibh sapien, a posuere risus mollis sit amet. Cras lorem massa, fringilla pulvinar dapibus ac, pharetra eu enim. Nam arcu ante, consequat vitae ultricies non, posuere vitae quam. Etiam imperdiet, ligula non venenatis suscipit, dolor leo mattis quam, dignissim sodales tortor felis vitae turpis. Ut sed congue tellus, fringilla scelerisque leo. Fusce viverra varius convallis. Aliquam faucibus odio nunc, malesuada gravida sem gravida sed. Vivamus sollicitudin dolor euismod libero aliquam, at cursus sapien auctor.</p>
   </ReadMore>
+  <Well color="blue-cumulus" weight="regular" class="fr-my-2w">
+    <div class="fr-grid-row">
+      <div class="fr-col-auto fr-mr-3v">
+        <img :src="editIcon" alt="" />
+      </div>
+      <div class="fr-col">
+        <p class="fr-m-0 fr-text--bold">What is a dataset?</p>
+        <p class="fr-m-0 fr-text--xs">On udata-front, a dataset is a set of files.</p>
+      </div>
+    </div>
+  </Well>
+  <Well class="fr-my-2w">
+    Simple Well
+  </Well>
 </template>

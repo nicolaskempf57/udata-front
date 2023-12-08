@@ -8,5 +8,6 @@ import { ToggleTip } from "./ToggleTip";
 import { QualityComponent } from "./QualityComponent"
 import { QualityComponentInline } from "./QualityComponentInline"
 import { ReadMore } from "./ReadMore"
+import Well from "./Well";
 
-export { OrganizationNameWithCertificate, Pagination, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
+export { OrganizationNameWithCertificate, Pagination, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip, Well };

@@ -84,12 +84,11 @@
 <script setup lang="ts">
 import { MaybeRefOrGetter, onMounted, ref, watch, watchEffect } from "vue";
 import { read_only_enabled } from "../../config";
-import { Pagination } from "@etalab/data.gouv.fr-components";
+import { Pagination, Well } from "@etalab/data.gouv.fr-components";
 import ThreadCreate from "./ThreadCreate/ThreadCreate.vue";
 import Thread from "./Thread/Thread.vue";
 import Loader from "./Thread/Loader.vue";
 import ThreadCreateButton from "./ThreadCreate/ThreadCreateButton.vue";
-import Well from "../Ui/Well/Well.vue";
 import { useI18n } from "vue-i18n";
 import { api } from "../../plugins/api";
 import { useToast } from "../../composables/useToast";
