@@ -74,39 +74,35 @@
         :score="quality.score"
         class="w-100"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.dataset_description_quality"
         :message="$t('Data description empty')"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.resources_documentation"
         :message="$t('Files documentation missing')"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.license"
         :message="$t('No license set')"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.update_frequency && quality.update_fulfilled_in_time"
         :message="quality.update_frequency ? $t('Update frequency not followed') : $t('Update frequency not set')"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.has_open_format"
         :message="$t('File formats are closed')"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.temporal_coverage"
         :message="$t('Temporal coverage not set')"
     />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.spatial"
         :message="$t('Spatial coverage not set')"
     />
-    <QualityItemWarning 
-        :quality-item="quality.temporal_coverage"
-        :message="$t('Temporal coverage not set')"
-    />
-    <QualityItemWarning 
+    <QualityItemWarning
         :quality-item="quality.all_resources_available"
         :message="$t('Some files are unavailable')"
     />
