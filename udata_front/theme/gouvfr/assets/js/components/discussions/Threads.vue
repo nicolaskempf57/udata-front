@@ -86,12 +86,12 @@
 <script>
 import { defineComponent, onMounted, ref, unref, watch, watchEffect } from "vue";
 import { read_only_enabled } from "../../config";
+import { Well } from "@etalab/data.gouv.fr-components";
 import { Pagination } from "@etalab/udata-front-plugins-helper";
 import ThreadCreate from "./ThreadCreate/ThreadCreate.vue";
 import Thread from "./Thread/Thread.vue";
 import Loader from "./Thread/Loader.vue";
 import ThreadCreateButton from "./ThreadCreate/ThreadCreateButton.vue";
-import Well from "../Ui/Well/Well.vue";
 import { useI18n } from "vue-i18n";
 import { api } from "../../plugins/api";
 import { useToast } from "../../composables/useToast";

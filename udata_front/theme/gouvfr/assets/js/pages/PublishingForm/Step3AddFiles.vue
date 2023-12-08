@@ -146,6 +146,7 @@
 <script>
 import { computed, defineComponent, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { Well } from "@etalab/data.gouv.fr-components";
 import Accordion from '../../components/Accordion/Accordion.vue';
 import AccordionGroup from '../../components/Accordion/AccordionGroup.vue';
 import Alert from '../../components/Alert/Alert.vue';
@@ -157,7 +158,6 @@ import LinkedToAccordion from '../../components/Form/LinkedToAccordion/LinkedToA
 import Sidemenu from '../../components/Sidemenu/Sidemenu.vue';
 import Stepper from '../../components/Form/Stepper/Stepper.vue';
 import UploadModalButton from '../../components/Form/UploadGroup/UploadModalButton.vue';
-import Well from "../../components/Ui/Well/Well.vue";
 import useUid from "../../composables/useUid";
 import useFunctionalState from '../../composables/form/useFunctionalState';
 import { requiredWithCustomMessage, withMessage } from '../../i18n';
