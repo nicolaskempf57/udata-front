@@ -183,11 +183,20 @@ test.. test... test..... test?..... test!....
   </Well>
   <DatasetCard
     :dataset="dataset"
+    dataset-url="/datasets/6571faa17f46a65ee05c4d17"
+    organization-url=""
+    style="z-index: 3;"
   />
   <DatasetCard
     :dataset="dataset"
+    dataset-url="/datasets/6571faa17f46a65ee05c4d17"
+    organization-url="/organization/another-url-easier-to-distinguish"
+    style="z-index: 2;"
   />
   <DatasetCard
     :dataset="dataset"
+    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
+    organization-url=""
+    style="z-index: 1;"
   />
 </template>

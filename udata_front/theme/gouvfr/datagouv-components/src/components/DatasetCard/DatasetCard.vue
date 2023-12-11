@@ -34,18 +34,19 @@
         </div>
         <div class="fr-col">
           <h4 class="fr-mb-1v fr-grid-row">
-            <a :href="dataset.page" class="text-grey-500">
+            <a :href="datasetUrl" class="text-grey-500">
               {{ dataset.title }}
               <small v-if="dataset.acronym">{{ dataset.acronym }}</small>
             </a>
           </h4>
           <p class="fr-m-0 fr-text--sm" v-if="dataset.organization || dataset.owner">
             {{ $t('From') }}
-            <span class="not-enlarged" v-if="dataset.organization">
-              <a class="fr-link" :href="dataset.organization.page">
+            <span class="not-enlarged" v-if="organizationUrl != ''">
+              <a class="fr-link" :href="organizationUrl">
                 <OrganizationNameWithCertificate :organization="dataset.organization" />
               </a>
             </span>
+            <OrganizationNameWithCertificate v-else :organization="dataset.organization" />
             <template v-if="dataset.owner">{{ownerName}}</template>
           </p>
           <p class="fr-mt-1w fr-mb-2w fr-hidden fr-unhidden-sm overflow-wrap-anywhere">
@@ -95,11 +96,14 @@
   
   type Props = {
     dataset: Dataset,
+    datasetUrl: string,
+    organizationUrl?: string
     style?: Object,
     showMetrics?: boolean
   }
 
   const props = withDefaults(defineProps<Props>(), {
+    organizationUrl: "",
     style: () => ({}),
     showMetrics: true
   });
