@@ -152,7 +152,7 @@ test.. test... test..... test?..... test!....
       <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
     </template>
   </ToggleTip>
-  <QualityComponent 
+  <QualityComponent
     :quality="quality"
   ></QualityComponent>
   <QualityComponentInline
@@ -162,22 +162,25 @@ test.. test... test..... test?..... test!....
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquet, justo vitae facilisis lobortis, turpis velit suscipit urna, vel rutrum arcu lacus vitae felis. Proin ac orci et tellus auctor sodales. Cras eleifend a lacus tempor tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer mi urna, tempor vel feugiat eget, aliquet quis eros. Sed nisi tortor, fringilla vitae orci vel, faucibus imperdiet mauris. Maecenas nunc eros, dapibus vitae orci ut, semper ultricies sem.
 
     Pellentesque nulla ex, condimentum quis urna quis, ultrices vehicula risus. Duis facilisis nisl massa, et consequat nisi tristique ultricies. Praesent aliquam bibendum urna, non fermentum augue tempor ac. Sed tincidunt nibh sapien, a posuere risus mollis sit amet. Cras lorem massa, fringilla pulvinar dapibus ac, pharetra eu enim. Nam arcu ante, consequat vitae ultricies non, posuere vitae quam. Etiam imperdiet, ligula non venenatis suscipit, dolor leo mattis quam, dignissim sodales tortor felis vitae turpis. Ut sed congue tellus, fringilla scelerisque leo. Fusce viverra varius convallis. Aliquam faucibus odio nunc, malesuada gravida sem gravida sed. Vivamus sollicitudin dolor euismod libero aliquam, at cursus sapien auctor.
-  
+
     Pellentesque nulla ex, condimentum quis urna quis, ultrices vehicula risus. Duis facilisis nisl massa, et consequat nisi tristique ultricies. Praesent aliquam bibendum urna, non fermentum augue tempor ac. Sed tincidunt nibh sapien, a posuere risus mollis sit amet. Cras lorem massa, fringilla pulvinar dapibus ac, pharetra eu enim. Nam arcu ante, consequat vitae ultricies non, posuere vitae quam. Etiam imperdiet, ligula non venenatis suscipit, dolor leo mattis quam, dignissim sodales tortor felis vitae turpis. Ut sed congue tellus, fringilla scelerisque leo. Fusce viverra varius convallis. Aliquam faucibus odio nunc, malesuada gravida sem gravida sed. Vivamus sollicitudin dolor euismod libero aliquam, at cursus sapien auctor.</p>
   </ReadMore>
   <DatasetCard
     :dataset="dataset"
-    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
-    :organization-url="''"
+    dataset-url="/datasets/6571faa17f46a65ee05c4d17"
+    organization-url=""
+    style="z-index: 3;"
   />
   <DatasetCard
     :dataset="dataset"
-    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
-    :organization-url="'/datasets/6571faa17f46a65ee05c4d17'"
+    dataset-url="/datasets/6571faa17f46a65ee05c4d17"
+    organization-url="/organization/another-url-easier-to-distinguish"
+    style="z-index: 2;"
   />
   <DatasetCard
     :dataset="dataset"
-    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
-    :organization-url="''"
+    :dataset-url="dataset.page"
+    organization-url=""
+    style="z-index: 1;"
   />
 </template>
