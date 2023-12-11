@@ -46,9 +46,7 @@
                 <OrganizationNameWithCertificate :organization="dataset.organization" />
               </a>
             </span>
-            <span class="not-enlarged" v-else>
-              <OrganizationNameWithCertificate :organization="dataset.organization" />
-            </span>
+            <OrganizationNameWithCertificate v-else :organization="dataset.organization" />
             <template v-if="dataset.owner">{{ownerName}}</template>
           </p>
           <p class="fr-mt-1w fr-mb-2w fr-hidden fr-unhidden-sm overflow-wrap-anywhere">

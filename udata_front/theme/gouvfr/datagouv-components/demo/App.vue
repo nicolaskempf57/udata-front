@@ -179,7 +179,7 @@ test.. test... test..... test?..... test!....
   />
   <DatasetCard
     :dataset="dataset"
-    :dataset-url="dataset.page"
+    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
     organization-url=""
     style="z-index: 1;"
   />
