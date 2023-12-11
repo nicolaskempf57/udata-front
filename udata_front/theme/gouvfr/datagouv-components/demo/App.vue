@@ -167,11 +167,17 @@ test.. test... test..... test?..... test!....
   </ReadMore>
   <DatasetCard
     :dataset="dataset"
+    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
+    :organization-url="''"
   />
   <DatasetCard
     :dataset="dataset"
+    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
+    :organization-url="'/datasets/6571faa17f46a65ee05c4d17'"
   />
   <DatasetCard
     :dataset="dataset"
+    :dataset-url="'/datasets/6571faa17f46a65ee05c4d17'"
+    :organization-url="''"
   />
 </template>
