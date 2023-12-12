@@ -53,7 +53,7 @@
             {{ excerpt(dataset.description, 160) }}
           </p>
           <div class="fr-m-0 fr-grid-row fr-grid-row--middle">
-            <QualityComponentInline :quality="dataset.quality" :class="`dash-after`" />
+            <QualityComponentInline :quality="dataset.quality" :class="`fr-hidden flex-sm dash-after`" />
             <p class=fr-m-0>{{ $t('Updated {date}', {date: formatRelativeIfRecentDate(dataset.last_update)}) }}</p>
           </div>
         </div>
