@@ -88,6 +88,7 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 import { useI18n } from "vue-i18n";
+import type { RouteLocationRaw } from "vue-router";
 import { formatRelativeIfRecentDate } from "../../helpers";
 import { useOwnerName } from "../../composables"
 import OrganizationNameWithCertificate from "../Organization/OrganizationNameWithCertificate.vue";
@@ -98,11 +99,12 @@ import { excerpt } from "../../helpers";
 import type { Dataset, DatasetV2 } from "../../types/datasets";
 import AppLink from "../AppLink/AppLink.vue";
 
+
 defineOptions({inheritAttrs: false});
 
 type Props = {
   dataset: Dataset | DatasetV2,
-  datasetUrl: string,
+  datasetUrl: RouteLocationRaw,
   organizationUrl?: string,
   style?: StyleValue,
   showMetrics?: boolean,
