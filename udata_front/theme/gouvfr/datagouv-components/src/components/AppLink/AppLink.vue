@@ -22,7 +22,6 @@ withDefaults(defineProps<RouterLinkProps>(), {
 const router = inject(routerKey, null);
 
 function isExternalLink(link: RouteLocationRaw): link is string {
-  console.log(router, link)
   return !router || (typeof link === 'string' && link.startsWith('http'));
 }
 </script>
