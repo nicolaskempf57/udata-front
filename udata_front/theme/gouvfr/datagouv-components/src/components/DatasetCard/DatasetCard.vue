@@ -1,114 +1,119 @@
 <template>
-    <article class="fr-my-3w fr-p-3w border border-default-grey fr-enlarge-link" :style="style">
-      <div class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v" v-if="dataset.private || dataset.archived">
-        <p class="fr-badge fr-badge--mention-grey fr-mr-1w" v-if="dataset.private">
-          <span class="fr-icon-lock-line" aria-hidden="true"></span>
-          {{ t('Private') }}
-        </p>
-        <p class="fr-badge fr-badge--mention-grey" v-if="dataset.archived">
-          <span class="fr-icon-archive-line" aria-hidden="true"></span>
-          {{ t('Archived') }}
-        </p>
-      </div>
-      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--top">
-        <div class="fr-col-auto">
-          <div class="logo">
-            <Placeholder
-              v-if="dataset.organization"
-              type="dataset"
-              :src="dataset.organization.logo_thumbnail"
-              alt=""
-              :size="60"
-            />
-            <Avatar
-              v-else-if="dataset.owner"
-              :user="dataset.owner"
-              :size="60"
-            />
-            <Placeholder
-              v-else
-              type="dataset"
-              :size="60"
-            />
-          </div>
+  <article class="fr-my-3w fr-p-3w border border-default-grey fr-enlarge-link" :style="style">
+    <div class="absolute top-0 fr-grid-row fr-grid-row--middle fr-mt-n3v" v-if="dataset.private || dataset.archived">
+      <p class="fr-badge fr-badge--mention-grey fr-mr-1w" v-if="dataset.private">
+        <span class="fr-icon-lock-line" aria-hidden="true"></span>
+        {{ t('Private') }}
+      </p>
+      <p class="fr-badge fr-badge--mention-grey" v-if="dataset.archived">
+        <span class="fr-icon-archive-line" aria-hidden="true"></span>
+        {{ t('Archived') }}
+      </p>
+    </div>
+    <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--top">
+      <div class="fr-col-auto">
+        <div class="logo">
+          <Placeholder
+            v-if="dataset.organization"
+            type="dataset"
+            :src="dataset.organization.logo_thumbnail"
+            alt=""
+            :size="60"
+          />
+          <Avatar
+            v-else-if="dataset.owner"
+            :user="dataset.owner"
+            :size="60"
+          />
+          <Placeholder
+            v-else
+            type="dataset"
+            :size="60"
+          />
         </div>
-        <div class="fr-col">
-          <h4 class="fr-mb-1v fr-grid-row">
-            <a :href="datasetUrl" class="text-grey-500">
+      </div>
+      <div class="fr-col">
+        <h4 class="fr-mb-1v fr-grid-row">
+          <slot name="datasetUrl" :dataset="dataset" :datasetUrl="datasetUrl">
+            <AppLink :to="datasetUrl" class="text-grey-500">
               {{ dataset.title }}
               <small v-if="dataset.acronym">{{ dataset.acronym }}</small>
-            </a>
-          </h4>
-          <p class="fr-m-0 fr-text--sm" v-if="dataset.organization || dataset.owner">
-            {{ $t('From') }}
+            </AppLink>
+          </slot>
+        </h4>
+        <p class="fr-m-0 fr-text--sm" v-if="dataset.organization || dataset.owner">
+          {{ $t('From') }}
+          <template v-if="dataset.organization">
             <span class="not-enlarged" v-if="organizationUrl != ''">
               <a class="fr-link" :href="organizationUrl">
                 <OrganizationNameWithCertificate :organization="dataset.organization" />
               </a>
             </span>
             <OrganizationNameWithCertificate v-else :organization="dataset.organization" />
-            <template v-if="dataset.owner">{{ownerName}}</template>
-          </p>
-          <p class="fr-mt-1w fr-mb-2w fr-hidden fr-unhidden-sm overflow-wrap-anywhere">
-            {{ excerpt(dataset.description, 160) }}
-          </p>
-          <div class="fr-m-0 fr-grid-row fr-grid-row--middle">
-            <QualityComponentInline :quality="dataset.quality" :class="`fr-hidden flex-sm dash-after`" />
-            <p class=fr-m-0>{{ $t('Updated {date}', {date: formatRelativeIfRecentDate(dataset.last_update)}) }}</p>
-          </div>
+          </template>
+          <template v-else>{{ownerName}}</template>
+        </p>
+        <p class="fr-mt-1w fr-mb-2w fr-hidden fr-unhidden-sm overflow-wrap-anywhere">
+          {{ excerpt(dataset.description, 160) }}
+        </p>
+        <div class="fr-m-0 fr-grid-row fr-grid-row--middle">
+          <QualityComponentInline :quality="dataset.quality" :class="`fr-hidden flex-sm dash-after`" />
+          <p class=fr-m-0>{{ $t('Updated {date}', {date: formatRelativeIfRecentDate(dataset.last_update)}) }}</p>
         </div>
-        <ul v-if="showMetrics" class="fr-hidden fr-unhidden-sm fr-hidden-md fr-unhidden-lg fr-col-auto fr-tags-group fr-grid-row--bottom self-center flex-direction-column">
-          <li>
-            <p class="fr-tag">
-              <i18n-t keypath="{n} reuses" :plural="dataset.metrics.reuses || 0" scope="global">
-                <template #n>
-                  <strong class="fr-mr-1v">{{dataset.metrics.reuses || 0}}</strong>
-                </template>
-              </i18n-t>
-            </p>
-          </li>
-          <li>
-            <p class="fr-tag">
-              <i18n-t keypath="{n} favorites" :plural="dataset.metrics.followers || 0" scope="global">
-                <template #n>
-                  <strong class="fr-mr-1v">{{dataset.metrics.followers}}</strong>
-                </template>
-              </i18n-t>
-            </p>
-          </li>
-        </ul>
       </div>
-    </article>
-  </template>
-  
-  <script setup lang="ts">
-  import { useI18n } from "vue-i18n";
-  import { formatRelativeIfRecentDate } from "../../helpers";
-  import { useOwnerName } from "../../composables"
-  import OrganizationNameWithCertificate from "../Organization/OrganizationNameWithCertificate.vue";
-  import { Avatar } from "../Avatar";
-  import { Placeholder } from "../utils/";
-  import { QualityComponentInline } from "../QualityComponentInline";
-  import { excerpt } from "../../helpers";
-  import type { Dataset } from "../../types/datasets";
+      <ul v-if="showMetrics" class="fr-hidden fr-unhidden-sm fr-hidden-md fr-unhidden-lg fr-col-auto fr-tags-group fr-grid-row--bottom self-center flex-direction-column">
+        <li>
+          <p class="fr-tag">
+            <i18n-t keypath="{n} reuses" :plural="dataset.metrics.reuses || 0" scope="global">
+              <template #n>
+                <strong class="fr-mr-1v">{{dataset.metrics.reuses || 0}}</strong>
+              </template>
+            </i18n-t>
+          </p>
+        </li>
+        <li>
+          <p class="fr-tag">
+            <i18n-t keypath="{n} favorites" :plural="dataset.metrics.followers || 0" scope="global">
+              <template #n>
+                <strong class="fr-mr-1v">{{dataset.metrics.followers}}</strong>
+              </template>
+            </i18n-t>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </article>
+</template>
 
-  defineOptions({inheritAttrs: false})
-  
-  type Props = {
-    dataset: Dataset,
-    datasetUrl: string,
-    organizationUrl?: string
-    style?: Object,
-    showMetrics?: boolean
-  }
+<script setup lang="ts">
+import type { StyleValue } from "vue";
+import { useI18n } from "vue-i18n";
+import { formatRelativeIfRecentDate } from "../../helpers";
+import { useOwnerName } from "../../composables"
+import OrganizationNameWithCertificate from "../Organization/OrganizationNameWithCertificate.vue";
+import { Avatar } from "../Avatar";
+import { Placeholder } from "../utils/";
+import { QualityComponentInline } from "../QualityComponentInline";
+import { excerpt } from "../../helpers";
+import type { Dataset, DatasetV2 } from "../../types/datasets";
+import AppLink from "../AppLink/AppLink.vue";
 
-  const props = withDefaults(defineProps<Props>(), {
-    organizationUrl: "",
-    style: () => ({}),
-    showMetrics: true
-  });
+defineOptions({inheritAttrs: false});
 
-  const { t } = useI18n();
-  const ownerName = useOwnerName(props.dataset);
-  </script>
-  
+type Props = {
+  dataset: Dataset | DatasetV2,
+  datasetUrl: string,
+  organizationUrl?: string,
+  style?: StyleValue,
+  showMetrics?: boolean,
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  organizationUrl: "",
+  style: () => ({}),
+  showMetrics: true,
+});
+
+const { t } = useI18n();
+const ownerName = useOwnerName(props.dataset);
+</script>

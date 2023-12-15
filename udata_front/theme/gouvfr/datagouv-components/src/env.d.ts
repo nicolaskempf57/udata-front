@@ -13,3 +13,7 @@ interface ImportMetaEnv {
 interface ImportMeta {
     readonly env: ImportMetaEnv
 }
+
+declare module globalThis {
+    var _paq: Array<Array<string>>;
+  }

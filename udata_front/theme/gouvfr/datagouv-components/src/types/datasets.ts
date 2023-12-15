@@ -1,3 +1,4 @@
+import type { Badges } from "./badges";
 import type { Owned } from "./owned";
 import type { Resource } from "./resources";
 
@@ -34,8 +35,16 @@ export type NewDataset = Owned & {
     } | null;
 };
 
+export type Rel = {
+    rel: string;
+    href: string;
+    total: number;
+    type: string;
+};
+
 export type Dataset = NewDataset & {
     id: string;
+    badges: Badges;
     page: string;
     resources: Array<Resource>;
     community_resources: Array<Resource>;
@@ -46,4 +55,10 @@ export type Dataset = NewDataset & {
     slug: string;
     quality: Quality;
     metrics: { discussions: number; followers: number; reuses: number; views: number; };
+};
+
+
+export type DatasetV2 = NewDataset & Omit<Dataset, 'resources' | 'community_resources'> & {
+    resources: Rel;
+    community_resources: Rel;
 };

@@ -1,3 +1,4 @@
+import AppLink from "./AppLink/AppLink.vue";
 import OrganizationNameWithCertificate from "./Organization";
 import { DatasetCard } from "./DatasetCard"
 import { ResourceAccordion, Loader as ResourceAccordionLoader } from "./ResourceAccordion";
@@ -9,4 +10,4 @@ import { QualityComponent } from "./QualityComponent"
 import { QualityComponentInline } from "./QualityComponentInline"
 import { ReadMore } from "./ReadMore"
 
-export { DatasetCard, OrganizationNameWithCertificate, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };
+export { AppLink, DatasetCard, OrganizationNameWithCertificate, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip };

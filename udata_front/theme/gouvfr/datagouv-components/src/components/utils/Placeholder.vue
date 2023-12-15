@@ -21,15 +21,15 @@ However, if `src` is undefined, it falls back to a placeholder. Don't forget to 
       v-bind="$attrs"
     />
   </template>
-  
+
   <script setup lang="ts">
   import { computed } from "vue";
   import { computedAsync } from '@vueuse/core';
 
   const props = defineProps<{
     type: string,
-    src: string,
-    alt: string,
+    src?: string,
+    alt?: string,
     size: number
   }>();
 
@@ -39,6 +39,5 @@ However, if `src` is undefined, it falls back to a placeholder. Don't forget to 
   };
 
   const alternativeTextForDefinedImageOnly = computed(() => props.src ? props.alt : '');
-  const path = computedAsync(() => placeholderUrl())
+  const path = computedAsync(() => placeholderUrl());
   </script>
-  
