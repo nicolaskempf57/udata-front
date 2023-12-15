@@ -339,7 +339,7 @@
 
 <script setup lang="ts">
 import Clipboard from "clipboard";
-import { ref, computed, unref, onMounted, type ComputedRef } from "vue";
+import { ref, computed, unref, onMounted, type MaybeRefOrGetter, toValue } from "vue";
 import SchemaLoader from "./SchemaLoader.vue";
 import useOwnerName from "../../composables/organizations/useOwnerName";
 import useResourceImage from "../../composables/resources/useResourceImage";
@@ -354,9 +354,9 @@ import useSchema from "../../composables/resources/useSchema";
 import useComponentsForHook from "../../composables/useComponentsForHook";
 import { config } from "../../config";
 import { filesize, formatRelativeIfRecentDate, formatDate, markdown } from "../../helpers";
-import type { Resource } from "../../types/resources";
 import { templateRef, unrefElement } from "@vueuse/core";
 import useTabs from "../../composables/useTabs";
+import type { Resource } from "../../types/resources";
 
 type Props = {
   datasetId: string,
@@ -442,9 +442,9 @@ const expand = () => {
   }
 }
 
-const registerEvent = (tab: ComputedRef<string> | string) => {
+const registerEvent = (tab: MaybeRefOrGetter<string>) => {
   const tabName = unref(tab);
-  globalThis._paq?.push(['trackEvent', 'View resource tab', props.resource.id, tab]);
+  globalThis._paq?.push(['trackEvent', 'View resource tab', props.resource.id, toValue(tab)]);
   if(tabName === resourcePreviewButtonId.value) {
     globalThis._paq?.push(['trackEvent', 'Show preview', props.resource.id]);
   } else if (tabName === resourceStructureButtonId.value) {
