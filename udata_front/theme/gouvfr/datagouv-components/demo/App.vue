@@ -143,7 +143,7 @@ const dataset : DatasetV2 = {
   </h1>
   <ResourceAccordion dataset-id="someId" :resource="resource" :expanded-on-mount="false" />
   <ResourceAccordion dataset-id="someId" :resource="resourceWithoutSchema" :expanded-on-mount="false" />
-  <Pagination :total-results="52" @change="p => console.log(p)" />
+  <Pagination class="fr-mt-3v" :total-results="52" @change="p => console.log(p)" />
   <QualityScore :score="0.5" class="w-100"></QualityScore>
   <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
   <ToggleTip>
