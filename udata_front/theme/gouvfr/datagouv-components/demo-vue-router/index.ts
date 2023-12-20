@@ -6,15 +6,20 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { setupI18n } from '../src';
 
 import App from '../demo/App.vue';
-import Dataset from "./Dataset.vue";
+import Details from "./Details.vue";
 import View from "./View.vue";
 
 const routes = [
     { path: '/', component: App },
     {
-        path: '/datasets/:did',
+        path: '/datasets/:id',
         name: 'dataset_detail',
-        component: Dataset,
+        component: Details,
+    },
+    {
+        path: '/organizations/:id',
+        name: 'organization_detail',
+        component: Details,
     }
 ];
 
