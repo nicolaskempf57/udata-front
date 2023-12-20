@@ -1,9 +1,9 @@
 <template>
-  {{ datasetId }}
+  {{ id }}
 </template>
 <script setup>
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const datasetId = route.params.did;
+const id = route.params.id;
 </script>
