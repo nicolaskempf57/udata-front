@@ -77,7 +77,19 @@ test.. test... test..... test?..... test!....
     organization: null,
     url: "https://static.data.gouv.fr/resources/indice-de-reparabilite-organisation-ribimex/20231115-104022/data.csv"
   });
-
+  const quality = {
+    all_resources_available: false,
+    dataset_description_quality: false,
+    has_open_format: true,
+    has_resources: false,
+    license: false,
+    resources_documentation: true,
+    score: 0.9,
+    spatial: false,
+    temporal_coverage: false,
+    update_frequency: false,
+    update_fulfilled_in_time: false,
+  };
   const dataset : Dataset = {
   id: "653a6afa18f9f98d2ffdadee",
   page: "https://demo.data.gouv.fr/fr/datasets/donnees-changement-climatique-sqr/",
