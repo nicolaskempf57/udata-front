@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Dataset, ResourceAccordion } from "../src";
+import { type DatasetV2, InformationPanel, ResourceAccordion } from "../src";
 import { ref } from "vue";
 import type { Resource } from "../src";
 
@@ -90,7 +90,7 @@ test.. test... test..... test?..... test!....
     update_frequency: false,
     update_fulfilled_in_time: false,
   };
-  const dataset : Dataset = {
+  const dataset : DatasetV2 = {
   id: "653a6afa18f9f98d2ffdadee",
   page: "https://demo.data.gouv.fr/fr/datasets/donnees-changement-climatique-sqr/",
   resources: {
@@ -145,4 +145,5 @@ test.. test... test..... test?..... test!....
   <ResourceAccordion dataset-id="someId" :resource="resource" :expanded-on-mount="false" />
   <ResourceAccordion dataset-id="someId" :resource="resourceWithoutSchema" :expanded-on-mount="false" />
 
+  <InformationPanel :dataset="dataset" />
 </template>
