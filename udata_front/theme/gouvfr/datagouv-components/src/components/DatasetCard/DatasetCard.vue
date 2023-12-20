@@ -44,10 +44,10 @@
         <p class="fr-m-0 fr-text--sm" v-if="dataset.organization || dataset.owner">
           {{ $t('From') }}
           <template v-if="dataset.organization">
-            <span class="not-enlarged" v-if="organizationUrl != ''">
-              <a class="fr-link" :href="organizationUrl">
+            <span class="not-enlarged" v-if="organizationUrl">
+              <AppLink :to="organizationUrl" class="fr-link">
                 <OrganizationNameWithCertificate :organization="dataset.organization" />
-              </a>
+              </AppLink>
             </span>
             <OrganizationNameWithCertificate v-else :organization="dataset.organization" />
           </template>
@@ -88,6 +88,7 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 import { useI18n } from "vue-i18n";
+import type { RouteLocationRaw } from "vue-router";
 import { formatRelativeIfRecentDate } from "../../helpers";
 import { useOwnerName } from "../../composables"
 import OrganizationNameWithCertificate from "../Organization/OrganizationNameWithCertificate.vue";
@@ -102,8 +103,8 @@ defineOptions({inheritAttrs: false});
 
 type Props = {
   dataset: Dataset | DatasetV2,
-  datasetUrl: string,
-  organizationUrl?: string,
+  datasetUrl: RouteLocationRaw,
+  organizationUrl?: RouteLocationRaw,
   style?: StyleValue,
   showMetrics?: boolean,
 }
