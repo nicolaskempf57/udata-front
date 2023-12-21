@@ -105,6 +105,15 @@ test.. test... test..... test?..... test!....
     total: 0,
     type: "GET"
   },
+  harvest: {
+    created_at: "Test",
+    modified_at: "Test",
+    source_id: "Test",
+    remote_id: "Test",
+    remote_url: "Test",
+    uri: "Test",
+    dct_identifier: "Test"
+  },
   created_at: "2023-10-26T13:34:50.156000+00:00",
   last_modified: "2023-12-07T16:51:02.937000+00:00",
   last_update: "2023-11-03T08:55:42.847000+00:00",

@@ -1,5 +1,5 @@
 <template>
-    <section class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">  
+    <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">  
         <h2 class="subtitle subtitle--uppercase">{{ $t('Informations') }}</h2>
         <div class="fr-text--sm fr-m-0">
             <div class="fr-grid-row fr-grid-row--gutters">     
@@ -19,8 +19,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+    </div>
+    <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
         <h2 class="subtitle subtitle--uppercase">{{ $t('Temporality') }}</h2>
         <div class="fr-text--sm fr-m-0">
             <div class="fr-grid-row fr-grid-row--gutters">   
@@ -40,8 +40,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+    </div>
+    <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
         <h2 class="subtitle subtitle--uppercase">Actions</h2>
         <div class="fr-text--sm fr-m-0">
             <h3 class="subtitle fr-mb-1v">{{ $t('Integrate on your website') }}</h3>
@@ -50,10 +50,51 @@
                 <CopyButton class="fr-my-1w fr-mr-1w" :text="embedText"/>
             </div>
         </div>
-    </section>
+    </div>
     <!--Here comes the extras-->
-    <!--Here comes the moissonage-->
-    <!--Here comes the statistics-->
+    <article v-if="props.dataset?.harvest" :class="{'drop-shadow': expanded}">
+        <header
+            class="fr-p-5v fr-grid-row fr-grid-row--middle no-wrap wrap-md justify-between border-default-grey"
+            :class="{'border-bottom': !expanded}"
+        >
+            <div class="fr-col-auto fr-grid-row fr-grid-row--top no-wrap">
+                <div class="fr-col-auto">
+                    <h2 class="subtitle subtitle--uppercase">{{ $t('Harvest') }}</h2>
+                </div>
+            </div>
+            <div class="fr-col-auto fr-ml-auto">
+                <div class="fr-grid-row fr-grid-row--middle no-wrap wrap-md">
+                    <button
+                        @click="expand"
+                        role="button"
+                        :aria-expanded="expanded"
+                        class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-btn--secondary-grey-500"
+                        :class="{'fr-icon-arrow-up-s-line': expanded, 'fr-icon-arrow-down-s-line': !expanded}"
+                    >
+                        <template v-if="expanded">
+                            {{ $t('Close details') }}
+                        </template>
+                        <template v-else>
+                            {{ $t('See harvest') }}
+                        </template>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div
+            class="accordion-content"
+            ref="contentRef"
+        >
+            <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+                <div class="fr-grid-row fr-grid-row--gutters fr-text--sm fr-m-0">
+                    <div v-for="(value, key) in props.dataset?.harvest" :key="key" class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+                        <h3 class="subtitle fr-mb-1v">{{ key }}</h3>
+                        <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ value }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
     <!--Here comes the stats-->
 </template>
 
@@ -61,8 +102,18 @@
 import { ref, defineProps } from 'vue';
 import { Dataset } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
+import { toggleAccordion } from "../../helpers/toggleAccordion";
+import { templateRef } from "@vueuse/core";
 const props = defineProps<{dataset: Dataset}>();
 const embedText = ref<string>(
     `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + 'script data-udata="https://www.data.gouv.fr/" src="https://static.data.gouv.fr/static/oembed.js" async defer><' + '/script>'
 );
+const contentRef = templateRef<HTMLElement | null>("contentRef");
+const expanded = ref(false);
+const expand = () => {
+  expanded.value = !expanded.value;
+  if(contentRef.value) {
+    toggleAccordion(contentRef.value, expanded.value);
+  }
+}
 </script>
