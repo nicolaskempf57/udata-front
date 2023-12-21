@@ -1,5 +1,5 @@
 <template>
-    <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">  
+    <div class="fr-py-3w fr-mb-3w border-bottom border-default-grey">  
         <h2 class="subtitle subtitle--uppercase">{{ $t('Informations') }}</h2>
         <div class="fr-text--sm fr-m-0">
             <div class="fr-grid-row fr-grid-row--gutters">     
@@ -41,6 +41,17 @@
             </div>
         </div>
     </div>
+    <div v-if="props.dataset.spatial?.granularity" class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+        <h2 class="subtitle subtitle--uppercase">{{ $t('Spatial coverage') }}</h2>
+        <div class="fr-text--sm fr-m-0">
+            <div class="fr-grid-row fr-grid-row--gutters">   
+                <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+                    <h3 class="subtitle fr-mb-1v">{{ $t('Granularity') }}</h3>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ props.dataset.spatial?.granularity }}</p>
+                </div>                  
+            </div>
+        </div>
+    </div>
     <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
         <h2 class="subtitle subtitle--uppercase">Actions</h2>
         <div class="fr-text--sm fr-m-0">
@@ -51,39 +62,73 @@
             </div>
         </div>
     </div>
-    <!--Here comes the extras-->
-    <article v-if="props.dataset?.harvest" :class="{'drop-shadow': expanded}">
+    <article v-if="props.dataset?.extras">
         <header
-            class="fr-p-5v fr-grid-row fr-grid-row--middle no-wrap wrap-md justify-between border-default-grey"
-            :class="{'border-bottom': !expanded}"
+            class="fr-grid-row fr-grid-row--middle fr-pb-3w fr-mb-3w border-bottom border-default-grey"
+            :class="{'border-bottom': !extrasExpanded}"
         >
-            <div class="fr-col-auto fr-grid-row fr-grid-row--top no-wrap">
-                <div class="fr-col-auto">
-                    <h2 class="subtitle subtitle--uppercase">{{ $t('Harvest') }}</h2>
-                </div>
+            <div class="fr-col">
+                <h2 class="subtitle subtitle--uppercase fr-m-0">{{ $t('Extras') }}</h2>
             </div>
-            <div class="fr-col-auto fr-ml-auto">
-                <div class="fr-grid-row fr-grid-row--middle no-wrap wrap-md">
-                    <button
-                        @click="expand"
-                        role="button"
-                        :aria-expanded="expanded"
-                        class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-btn--secondary-grey-500"
-                        :class="{'fr-icon-arrow-up-s-line': expanded, 'fr-icon-arrow-down-s-line': !expanded}"
-                    >
-                        <template v-if="expanded">
-                            {{ $t('Close details') }}
-                        </template>
-                        <template v-else>
-                            {{ $t('See harvest') }}
-                        </template>
-                    </button>
-                </div>
+            <div class="fr-col-auto">
+                <button
+                    @click="extrasExpand"
+                    role="button"
+                    :aria-expanded="extrasExpanded"
+                    class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-btn--secondary-grey-500"
+                    :class="{'fr-icon-arrow-up-s-line': extrasExpanded, 'fr-icon-arrow-down-s-line': !extrasExpanded}"
+                >
+                    <template v-if="extrasExpanded">
+                        {{ $t('Close details') }}
+                    </template>
+                    <template v-else>
+                        {{ $t('See extras') }}
+                    </template>
+                </button>
             </div>
         </header>
         <div
             class="accordion-content"
-            ref="contentRef"
+            ref="extrasRef"
+        >
+            <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+                <div class="fr-grid-row fr-grid-row--gutters fr-text--sm fr-m-0">
+                    <div v-for="(value, key) in props.dataset?.extras" :key="key" class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+                        <h3 class="subtitle fr-mb-1v">{{ key }}</h3>
+                        <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ value }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article v-if="props.dataset?.harvest">
+        <header
+            class="fr-grid-row fr-grid-row--middle fr-pb-3w fr-mb-3w border-bottom border-default-grey"
+            :class="{'border-bottom': !harvestExpanded}"
+        >
+            <div class="fr-col">
+                <h2 class="subtitle subtitle--uppercase fr-m-0">{{ $t('Harvest') }}</h2>
+            </div>
+            <div class="fr-col-auto">
+                <button
+                    @click="expand"
+                    role="button"
+                    :aria-expanded="harvestExpanded"
+                    class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-btn--secondary-grey-500"
+                    :class="{'fr-icon-arrow-up-s-line': harvestExpanded, 'fr-icon-arrow-down-s-line': !harvestExpanded}"
+                >
+                    <template v-if="harvestExpanded">
+                        {{ $t('Close details') }}
+                    </template>
+                    <template v-else>
+                        {{ $t('See harvest') }}
+                    </template>
+                </button>
+            </div>
+        </header>
+        <div
+            class="accordion-content"
+            ref="harvestRef"
         >
             <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
                 <div class="fr-grid-row fr-grid-row--gutters fr-text--sm fr-m-0">
@@ -108,12 +153,20 @@ const props = defineProps<{dataset: Dataset}>();
 const embedText = ref<string>(
     `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + 'script data-udata="https://www.data.gouv.fr/" src="https://static.data.gouv.fr/static/oembed.js" async defer><' + '/script>'
 );
-const contentRef = templateRef<HTMLElement | null>("contentRef");
-const expanded = ref(false);
+const extrasRef = templateRef<HTMLElement | null>("extrasRef");
+const harvestRef = templateRef<HTMLElement | null>("harvestRef");
+const extrasExpanded = ref(false);
+const harvestExpanded = ref(false);
 const expand = () => {
-  expanded.value = !expanded.value;
-  if(contentRef.value) {
-    toggleAccordion(contentRef.value, expanded.value);
+    harvestExpanded.value = !harvestExpanded.value;
+  if(harvestRef.value) {
+    toggleAccordion(harvestRef.value, harvestExpanded.value);
+  }
+}
+const extrasExpand = () => {
+  extrasExpanded.value = !extrasExpanded.value;
+  if(extrasRef.value) {
+    toggleAccordion(extrasRef.value, extrasExpanded.value);
   }
 }
 </script>

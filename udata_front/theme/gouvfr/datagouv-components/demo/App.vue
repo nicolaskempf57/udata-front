@@ -114,6 +114,20 @@ test.. test... test..... test?..... test!....
     uri: "Test",
     dct_identifier: "Test"
   },
+  extras: {
+    datagouv_ckan_id: "24e8dd4f-bc04-4568-8833-b2e252109ee1",
+    datagouv_ckan_last_sync: 1410861521,
+    "recommendations-reuses": [
+      {
+        "id": "635a9e6b04c1b9b37fb75a15",
+        "score": 50,
+        "source": "edito"
+      }
+    ],
+    "recommendations:sources": [
+      "edito"
+    ],
+  },
   created_at: "2023-10-26T13:34:50.156000+00:00",
   last_modified: "2023-12-07T16:51:02.937000+00:00",
   last_update: "2023-11-03T08:55:42.847000+00:00",
