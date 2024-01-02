@@ -2,6 +2,10 @@ import { reactive, readonly, ref } from "vue";
 
 const admin_root = ref(import.meta.env.VITE_ADMIN_ROOT);
 
+const api_root = ref(import.meta.env.VITE_API_URL);
+
+const api_2_root = ref(import.meta.env.VITE_API_2_URL);
+
 const show_copy_resource_permalink = ref(import.meta.env.VITE_SHOW_COPY_RESOURCE_PERMALINK === "true");
 
 const schema_documentation_url = ref(import.meta.env.VITE_SCHEMA_DOCUMENTATION_URL);
@@ -20,6 +24,8 @@ const default_lang = ref(import.meta.env.VITE_DEFAULT_LANG);
 
 const localConfig = reactive({
     admin_root,
+    api_root,
+    api_2_root,
     default_lang,
     explorable_resources,
     only_locales,
@@ -43,6 +49,8 @@ const setupComponents = (config: Partial<typeof localConfig>) => {
     schema_validata_url.value = mergedConfig.schema_validata_url;
     show_copy_resource_permalink.value = mergedConfig.show_copy_resource_permalink;
     title.value = mergedConfig.title;
+    api_root.value = mergedConfig.api_root;
+    api_2_root.value = mergedConfig.api_2_root;
 };
 
 export { config, setupComponents };

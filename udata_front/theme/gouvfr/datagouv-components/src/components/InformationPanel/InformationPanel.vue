@@ -51,7 +51,7 @@
                 </div>
                 <div v-if="props.dataset.spatial?.granularity" class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Granularity of territorial coverage') }}</h3>
-                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ getGranularity(props.dataset.spatial?.granularity) }}</p>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ getGranularity(granularities, props.dataset.spatial?.granularity) }}</p>
                 </div>                  
             </div>
         </div>
@@ -147,13 +147,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, onMounted } from 'vue';
 import { Dataset } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
 import { templateRef } from "@vueuse/core";
 import { formatDate } from '../../helpers/index';
-import { getGranularity } from '../../helpers/granularity';
+import { getGranularity, fetchGranularities } from '../../api/granularity';
 
 const props = defineProps<{
     dataset: Dataset,
@@ -162,12 +162,12 @@ const props = defineProps<{
 const embedText = ref<string>(
     `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + 'script data-udata="https://www.data.gouv.fr/" src="https://static.data.gouv.fr/static/oembed.js" async defer><' + '/script>'
 );
-const extrasRef = templateRef<HTMLElement | null>("extrasRef");
-const harvestRef = templateRef<HTMLElement | null>("harvestRef");
 const extrasExpanded = ref(false);
+const extrasRef = templateRef<HTMLElement | null>("extrasRef");
+const granularities = ref([]);
 const harvestExpanded = ref(false);
+const harvestRef = templateRef<HTMLElement | null>("harvestRef");
 const expand = () => {
-    console.log(props.dataset)
   harvestExpanded.value = !harvestExpanded.value;
   if(harvestRef.value) {
     toggleAccordion(harvestRef.value, harvestExpanded.value);
@@ -179,4 +179,8 @@ const extrasExpand = () => {
     toggleAccordion(extrasRef.value, extrasExpanded.value);
   }
 }
+
+onMounted(async () => {
+   granularities.value = await fetchGranularities();
+ });
 </script>
