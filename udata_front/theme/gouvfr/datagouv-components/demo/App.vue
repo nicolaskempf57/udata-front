@@ -91,74 +91,88 @@ test.. test... test..... test?..... test!....
     update_fulfilled_in_time: false,
   };
   const dataset : DatasetV2 = {
-  id: "653a6afa18f9f98d2ffdadee",
-  page: "https://demo.data.gouv.fr/fr/datasets/donnees-changement-climatique-sqr/",
-  resources: {
-    rel: "subsection",
-    href: "https://demo.data.gouv.fr/api/1/datasets/community_resources/?dataset=653a6afa18f9f98d2ffdadee&page=1&page_size=50",
-    total: 12,
-    type: "GET"
-  },
-  community_resources: {
-    rel: "subsection",
-    href: "https://demo.data.gouv.fr/api/2/datasets/653a6afa18f9f98d2ffdadee/resources/?page=1&page_size=50",
-    total: 0,
-    type: "GET"
-  },
-  harvest: {
-    created_at: "Test",
-    modified_at: "Test",
-    source_id: "Test",
-    remote_id: "Test",
-    remote_url: "Test",
-    uri: "Test",
-    dct_identifier: "Test"
-  },
-  extras: {
-    datagouv_ckan_id: "24e8dd4f-bc04-4568-8833-b2e252109ee1",
-    datagouv_ckan_last_sync: 1410861521,
-    "recommendations-reuses": [
-      {
-        "id": "635a9e6b04c1b9b37fb75a15",
-        "score": 50,
-        "source": "edito"
-      }
-    ],
-    "recommendations:sources": [
-      "edito"
-    ],
-  },
-  created_at: "2023-10-26T13:34:50.156000+00:00",
-  last_modified: "2023-12-07T16:51:02.937000+00:00",
-  last_update: "2023-11-03T08:55:42.847000+00:00",
-  uri: "https://demo.data.gouv.fr/api/1/datasets/donnees-changement-climatique-sqr/",
-  slug: "donnees-changement-climatique-sqr",
-  quality: quality,
-  metrics: { discussions: 12, followers: 25, reuses: 8, views: 59 },
-  title: "Données changement climatique - SQR",
-  acronym: null,
-  archived: null,
-  description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-  tags: null,
-  license: "lov2",
-  frequency: "Unknown",
-  temporal_coverage: "Test",
-  frequency_date: null,
-  private: false,
-  spatial: null,
-  badges: [],
-  organization: {
-    id: "some_id",
+    id: "653a6afa18f9f98d2ffdadee",
+    page: "https://demo.data.gouv.fr/fr/datasets/donnees-changement-climatique-sqr/",
+    resources: {
+      rel: "subsection",
+      href: "https://demo.data.gouv.fr/api/1/datasets/community_resources/?dataset=653a6afa18f9f98d2ffdadee&page=1&page_size=50",
+      total: 12,
+      type: "GET"
+    },
+    community_resources: {
+      rel: "subsection",
+      href: "https://demo.data.gouv.fr/api/2/datasets/653a6afa18f9f98d2ffdadee/resources/?page=1&page_size=50",
+      total: 0,
+      type: "GET"
+    },
+    harvest: {
+      backend: "OpenDataSoft",
+      modified_at: "2023-10-22T23:07:04.601000+00:00",
+      source_id: "5cd454758b4c4139d85b64f2",
+      remote_id: "prix-carburants-fichier-instantane-test-ods-copie",
+      domain: "data.economie.gouv.fr",
+      last_update: "2023-10-23T00:11:46.796000+00:00",
+      remote_url: "https://data.economie.gouv.fr/explore/dataset/prix-carburants-fichier-instantane-test-ods-copie/",
+      archived_at: "2023-10-31T00:24:10.854000+00:00",
+      archived: "not-on-remote",
+      ods_url: "https://data.economie.gouv.fr/explore/dataset/prix-carburants-fichier-instantane-test-ods-copie/",
+      ods_references: "https://donnees.roulez-eco.fr/opendata/instantane",
+      ods_has_records: true,
+      ods_geo: true
+    },
+    spatial: {
+      geom: null,
+      zones: [],
+      granularity: "other"
+    },
+    extras: {
+      datagouv_ckan_id: "24e8dd4f-bc04-4568-8833-b2e252109ee1",
+      datagouv_ckan_last_sync: 1410861521,
+      "recommendations-reuses": [
+        {
+          "id": "635a9e6b04c1b9b37fb75a15",
+          "score": 50,
+          "source": "edito"
+        }
+      ],
+      "recommendations:sources": [
+        "edito"
+      ],
+    },
+    created_at: "2023-10-26T13:34:50.156000+00:00",
+    last_modified: "2023-12-07T16:51:02.937000+00:00",
+    last_update: "2023-11-03T08:55:42.847000+00:00",
+    uri: "https://demo.data.gouv.fr/api/1/datasets/donnees-changement-climatique-sqr/",
+    slug: "donnees-changement-climatique-sqr",
+    quality: quality,
+    metrics: { discussions: 12, followers: 25, reuses: 8, views: 59 },
+    title: "Données changement climatique - SQR",
     acronym: null,
-    logo: "https://demo-static.data.gouv.fr/avatars/a2/b135634de04fb8a76c8ec3100e5e4b.png",
-    logo_thumbnail:"https://demo-static.data.gouv.fr/avatars/a2/b135634de04fb8a76c8ec3100e5e4b-100.png",
-    page: "https://demo.data.gouv.fr/fr/organizations/test-meteo-france/",
+    archived: null,
+    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+    tags: null,
+    license: "lov2",
+    frequency: "Unknown",
+    temporal_coverage: "Test",
+    frequency_date: null,
+    private: false,
     badges: [],
-    name: "[TEST] Météo France",
-    slug: "test-meteo-france",
-    uri: "https://demo.data.gouv.fr/api/1/organizations/test-meteo-france/"
+    organization: {
+      id: "some_id",
+      acronym: null,
+      logo: "https://demo-static.data.gouv.fr/avatars/a2/b135634de04fb8a76c8ec3100e5e4b.png",
+      logo_thumbnail:"https://demo-static.data.gouv.fr/avatars/a2/b135634de04fb8a76c8ec3100e5e4b-100.png",
+      page: "https://demo.data.gouv.fr/fr/organizations/test-meteo-france/",
+      badges: [],
+      name: "[TEST] Météo France",
+      slug: "test-meteo-france",
+      uri: "https://demo.data.gouv.fr/api/1/organizations/test-meteo-france/"
+    }
+  };
+  const license = {
+    title: "Licence Ouverte",
+    url: "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf"
   }
-}
 </script>
 
 <template>
@@ -168,5 +182,5 @@ test.. test... test..... test?..... test!....
   <ResourceAccordion dataset-id="someId" :resource="resource" :expanded-on-mount="false" />
   <ResourceAccordion dataset-id="someId" :resource="resourceWithoutSchema" :expanded-on-mount="false" />
 
-  <InformationPanel :dataset="dataset" />
+  <InformationPanel :dataset="dataset" :license="license" />
 </template>

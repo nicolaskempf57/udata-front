@@ -7,8 +7,8 @@
                     <h3 class="subtitle fr-mb-1v">{{ $t('License') }}</h3>
                     <p class="fr-text--sm fr-m-0 text-mention-grey ">
                         <code class="bg-alt-grey fr-px-1v text-grey-380">
-                            <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">
-                            {{ props.dataset.license }}
+                            <a :href="props.license.url">
+                            {{ props.license.title }}
                             </a>
                         </code>            
                     </p>
@@ -26,7 +26,7 @@
             <div class="fr-grid-row fr-grid-row--gutters">   
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Creation') }}</h3>
-                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ props.dataset.created_at }}</p>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ formatDate(props.dataset.created_at) }}</p>
                 </div>                  
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Frequency') }}</h3>
@@ -36,18 +36,22 @@
             <div class="fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Last update') }}</h3>
-                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ props.dataset.last_update }}</p>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ formatDate(props.dataset.last_update) }}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div v-if="props.dataset.spatial?.granularity" class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
+    <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
         <h2 class="subtitle subtitle--uppercase">{{ $t('Spatial coverage') }}</h2>
         <div class="fr-text--sm fr-m-0">
-            <div class="fr-grid-row fr-grid-row--gutters">   
+            <div class="fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
-                    <h3 class="subtitle fr-mb-1v">{{ $t('Granularity') }}</h3>
-                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ props.dataset.spatial?.granularity }}</p>
+                    <h3 class="subtitle fr-mb-1v">{{ $t('Territorial coverage') }}</h3>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">France</p>
+                </div>
+                <div v-if="props.dataset.spatial?.granularity" class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+                    <h3 class="subtitle fr-mb-1v">{{ $t('Granularity of territorial coverage') }}</h3>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ getGranularity(props.dataset.spatial?.granularity) }}</p>
                 </div>                  
             </div>
         </div>
@@ -140,7 +144,6 @@
             </div>
         </div>
     </article>
-    <!--Here comes the stats-->
 </template>
 
 <script setup lang="ts">
@@ -149,7 +152,13 @@ import { Dataset } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
 import { templateRef } from "@vueuse/core";
-const props = defineProps<{dataset: Dataset}>();
+import { formatDate } from '../../helpers/index';
+import { getGranularity } from '../../helpers/granularity';
+
+const props = defineProps<{
+    dataset: Dataset,
+    license: Object
+}>();
 const embedText = ref<string>(
     `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + 'script data-udata="https://www.data.gouv.fr/" src="https://static.data.gouv.fr/static/oembed.js" async defer><' + '/script>'
 );
@@ -158,7 +167,8 @@ const harvestRef = templateRef<HTMLElement | null>("harvestRef");
 const extrasExpanded = ref(false);
 const harvestExpanded = ref(false);
 const expand = () => {
-    harvestExpanded.value = !harvestExpanded.value;
+    console.log(props.dataset)
+  harvestExpanded.value = !harvestExpanded.value;
   if(harvestRef.value) {
     toggleAccordion(harvestRef.value, harvestExpanded.value);
   }
