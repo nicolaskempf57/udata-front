@@ -2,7 +2,7 @@ import { getLocalizedUrl } from "../helpers/i18n";
 import { type Granularities } from "../types/granularity";
 import { api } from "./api";
 
-let granularitiesRequest: Promise<Array<Granularities>>
+let granularitiesRequest: Promise<Granularities>
 
 export function getGranularity(granularities: Granularities, id: string): string | null {
   const granularity = granularities.find((g: any) => g.id === id);
@@ -13,11 +13,7 @@ export function getGranularitiesUrl() {
   return getLocalizedUrl('/spatial/granularities/');
 }
 
-/**
- *
- * @returns {Promise<Array>}
- */
-export function fetchGranularities(): Promise<Array<Granularities>> {
+export function fetchGranularities(): Promise<Granularities> {
   if (granularitiesRequest) {
     return granularitiesRequest;
   }
