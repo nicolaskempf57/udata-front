@@ -148,6 +148,7 @@
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted } from 'vue';
+import { config } from "../../config";
 import { Dataset } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
@@ -160,7 +161,7 @@ const props = defineProps<{
     license: Object
 }>();
 const embedText = ref<string>(
-    `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + 'script data-udata="https://www.data.gouv.fr/" src="https://static.data.gouv.fr/static/oembed.js" async defer><' + '/script>'
+    `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + `script data-udata="${config.site_root}" src="${config.static_root}oembed.js" async defer><` + '/script>'
 );
 const extrasExpanded = ref(false);
 const extrasRef = templateRef<HTMLElement | null>("extrasRef");
@@ -180,7 +181,9 @@ const extrasExpand = () => {
   }
 }
 
-onMounted(async () => {
-   granularities.value = await fetchGranularities();
+onMounted(() => {
+  fetchGranularities().then(foundGranularities => {console.log(foundGranularities), granularities.value = foundGranularities})
+  //granularities.value = await fetchGranularities();
+  console.log(granularities.value)
  });
 </script>

@@ -14,6 +14,10 @@ const schema_catalog_url = ref(import.meta.env.VITE_SCHEMA_CATALOG_URL);
 
 const schema_validata_url = ref(import.meta.env.VITE_SCHEMA_VALIDATA_URL);
 
+const site_root = ref(import.meta.env.VITE_SITE_ROOT_URL);
+
+const static_root = ref(import.meta.env.VITE_STATIC_ROOT_URL);
+
 const title = ref(import.meta.env.VITE_TITLE);
 
 const explorable_resources = ref<Array<string>>([]);
@@ -33,6 +37,8 @@ const localConfig = reactive({
     schema_documentation_url,
     schema_validata_url,
     show_copy_resource_permalink,
+    site_root,
+    static_root,
     title,
 });
 
@@ -48,6 +54,8 @@ const setupComponents = (config: Partial<typeof localConfig>) => {
     schema_documentation_url.value = mergedConfig.schema_documentation_url;
     schema_validata_url.value = mergedConfig.schema_validata_url;
     show_copy_resource_permalink.value = mergedConfig.show_copy_resource_permalink;
+    site_root.value = mergedConfig.site_root;
+    static_root.value = mergedConfig.static_root;
     title.value = mergedConfig.title;
     api_root.value = mergedConfig.api_root;
     api_2_root.value = mergedConfig.api_2_root;
