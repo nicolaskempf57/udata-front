@@ -73,12 +73,7 @@ const setupI18nWithExistingInstance = (newI18n: I18n) => {
 const loadedModules: Record<string, boolean> = {};
 
 export function getLocalizedUrl (path: string) {
-  let lang : string = ''
-  if (i18n?.global.locale) {
-    lang = i18n?.global.locale.value
-  } else {
-    lang = config.default_lang
-  }
+  const lang = i18n?.global.locale.value ?? config.default_lang;
   const url = new URL(api_root_absolute + path);
   const params = new URLSearchParams({ lang });
   url.search = params.toString();

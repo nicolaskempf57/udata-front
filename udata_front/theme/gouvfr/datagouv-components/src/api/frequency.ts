@@ -2,7 +2,7 @@ import { getLocalizedUrl } from "../helpers/i18n";
 import { type Frequencies } from "../types/frequency";
 import { api } from "./api";
 
-let frequenciesRequest: Promise<string | null>;
+let frequenciesRequest: Promise<Array<Frequencies>>;
 
 export function getFrequencies(frequencies: Frequencies, id: string): string | null {
   const frequency = frequencies.find((f: any) => f.id.toLowerCase() === id.toLowerCase());
@@ -15,9 +15,9 @@ export function getFrequenciesUrl() {
 
 /**
  *
- * @returns {Promise<Array>}
+ * @returns {Promise<Array<any>>}
  */
-export function fetchFrequencies() {
+export function fetchFrequencies(): Promise<Array<Frequencies>> {
   if (frequenciesRequest) {
     return frequenciesRequest;
   }
