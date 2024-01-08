@@ -156,6 +156,7 @@ import { templateRef } from "@vueuse/core";
 import { formatDate } from '../../helpers/index';
 import { getGranularity, fetchGranularities } from '../../api/granularity';
 import { getFrequencies, fetchFrequencies } from '../../api/frequency';
+import useOEmbed from '../../composables/useEmbed'
 
 const props = defineProps<{
     dataset: Dataset,
@@ -186,5 +187,6 @@ const extrasExpand = () => {
 onMounted(() => {
   fetchGranularities().then(foundGranularities => granularities.value = foundGranularities);
   fetchFrequencies().then(foundFrequencies => frequencies.value = foundFrequencies);
+  embedText.value = useOEmbed('dataset', props.dataset.id)
  });
 </script>
