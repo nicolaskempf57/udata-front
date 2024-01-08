@@ -1,12 +1,16 @@
-import axios from "axios";
-import { api_root_absolute } from "./api";
+import { getLocalizedUrl } from "../helpers/i18n";
+import { type Granularities } from "../types/granularity";
+import { api } from "./api";
 
-let foundGranularities;
-let granularitiesRequest = null;
+let granularitiesRequest: Promise<string | null>
 
-export function getGranularity(granularities: any[], id: string): string | null {
+export function getGranularity(granularities: Granularities, id: string): string | null {
   const granularity = granularities.find((g: any) => g.id === id);
   return granularity ? granularity.name : null;
+}
+
+export function getGranularitiesUrl() {
+  return getLocalizedUrl('/spatial/granularities/');
 }
 
 /**
@@ -15,9 +19,8 @@ export function getGranularity(granularities: any[], id: string): string | null 
  */
 export function fetchGranularities() {
   if (granularitiesRequest) {
-    return granularitiesRequest
+    return granularitiesRequest;
   }
-  return granularitiesRequest = axios.get(api_root_absolute + '/spatial/granularities')
-  .then((resp) => resp.data)
-  .then((data) => foundGranularities = data)
+  return granularitiesRequest = api.get(getGranularitiesUrl())
+  .then((resp) => resp.data);
 }

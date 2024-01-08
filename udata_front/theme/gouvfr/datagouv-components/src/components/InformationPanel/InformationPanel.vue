@@ -30,7 +30,7 @@
                 </div>                  
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Frequency') }}</h3>
-                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ props.dataset.frequency }}</p>
+                    <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ getFrequencies(frequencies, props.dataset.frequency) }}</p>
                 </div>
             </div>
             <div class="fr-grid-row fr-grid-row--gutters">
@@ -155,6 +155,7 @@ import { toggleAccordion } from "../../helpers/toggleAccordion";
 import { templateRef } from "@vueuse/core";
 import { formatDate } from '../../helpers/index';
 import { getGranularity, fetchGranularities } from '../../api/granularity';
+import { getFrequencies, fetchFrequencies } from '../../api/frequency';
 
 const props = defineProps<{
     dataset: Dataset,
@@ -166,6 +167,7 @@ const embedText = ref<string>(
 const extrasExpanded = ref(false);
 const extrasRef = templateRef<HTMLElement | null>("extrasRef");
 const granularities = ref([]);
+const frequencies = ref([]);
 const harvestExpanded = ref(false);
 const harvestRef = templateRef<HTMLElement | null>("harvestRef");
 const expand = () => {
@@ -182,8 +184,7 @@ const extrasExpand = () => {
 }
 
 onMounted(() => {
-  fetchGranularities().then(foundGranularities => {console.log(foundGranularities), granularities.value = foundGranularities})
-  //granularities.value = await fetchGranularities();
-  console.log(granularities.value)
+  fetchGranularities().then(foundGranularities => granularities.value = foundGranularities);
+  fetchFrequencies().then(foundFrequencies => frequencies.value = foundFrequencies);
  });
 </script>
