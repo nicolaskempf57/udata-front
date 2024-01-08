@@ -2,9 +2,7 @@ import { config } from ".."
 
 function constructUrl(baseUrl: string, path: string): string {
     const url = new URL(baseUrl);
-    url.pathname = url.pathname.endsWith('/')
-      ? `${url.pathname}${path}`
-      : `${url.pathname}/${path}`;
+    url.pathname = `${url.pathname}${path}`
     return url.toString();
   }
 

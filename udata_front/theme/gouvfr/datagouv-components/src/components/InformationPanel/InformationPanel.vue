@@ -148,7 +148,6 @@
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted } from 'vue';
-import { config } from "../../config";
 import { Dataset } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
@@ -162,9 +161,7 @@ const props = defineProps<{
     dataset: Dataset,
     license: Object
 }>();
-const embedText = ref<string>(
-    `<div data-udata-dataset="${props.dataset.id}"></div>` + '<' + `script data-udata="${config.site_root}" src="${config.static_root}oembed.js" async defer><` + '/script>'
-);
+const embedText = useOEmbed('dataset', props.dataset.id);
 const extrasExpanded = ref(false);
 const extrasRef = templateRef<HTMLElement | null>("extrasRef");
 const granularities = ref([]);
@@ -187,6 +184,5 @@ const extrasExpand = () => {
 onMounted(() => {
   fetchGranularities().then(foundGranularities => granularities.value = foundGranularities);
   fetchFrequencies().then(foundFrequencies => frequencies.value = foundFrequencies);
-  embedText.value = useOEmbed('dataset', props.dataset.id)
  });
 </script>
