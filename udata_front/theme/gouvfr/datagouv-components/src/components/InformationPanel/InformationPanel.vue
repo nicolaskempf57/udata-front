@@ -156,16 +156,20 @@ import { formatDate } from '../../helpers/index';
 import { getGranularity, fetchGranularities } from '../../api/granularity';
 import { getFrequencies, fetchFrequencies } from '../../api/frequency';
 import useOEmbed from '../../composables/useEmbed'
+import { Ref } from 'vue';
+import { Frequencies } from '../../types/frequency';
+import { Granularities } from '../../types/granularity';
+import { License } from '../../types/licenses';
 
 const props = defineProps<{
     dataset: Dataset,
-    license: Object
+    license: License
 }>();
 const embedText = useOEmbed('dataset', props.dataset.id);
 const extrasExpanded = ref(false);
 const extrasRef = templateRef<HTMLElement | null>("extrasRef");
-const granularities = ref([]);
-const frequencies = ref([]);
+const granularities: Ref<Granularities> = ref([]);
+const frequencies: Ref<Frequencies> = ref([]);
 const harvestExpanded = ref(false);
 const harvestRef = templateRef<HTMLElement | null>("harvestRef");
 const expand = () => {

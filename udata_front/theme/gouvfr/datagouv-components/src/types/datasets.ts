@@ -55,6 +55,8 @@ export type Dataset = NewDataset & {
     slug: string;
     quality: Quality;
     metrics: { discussions: number; followers: number; reuses: number; views: number; };
+    harvest: Record<string, any>
+    extras: Record<string, any>
 };
 
 
