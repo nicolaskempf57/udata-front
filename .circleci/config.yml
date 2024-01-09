@@ -6,6 +6,7 @@ orbs:
   cypress: cypress-io/cypress@3
 
 jobs:
+
   deps:
     docker:
       - image: udata/circleci:2-alpine
@@ -82,6 +83,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: "What was my custom environment variable?"
+          command: echo ${BUILDNO}
+      - run:
           name: Install python dependencies
           command: |
             source venv/bin/activate
@@ -91,6 +95,26 @@ jobs:
                         -r requirements/test.pip \
                         -r requirements/develop.pip
             pip install -e .
+      - run:
+          name: Set buildno var
+          command: |
+            if [[ $CIRCLE_TAG ]]; then
+                # This is a tagged release
+                echo 'export BUILDNO="'$CIRCLE_TAG'"' >> "$BASH_ENV"
+            elif [[ "$CIRCLE_BRANCH" == feature/* ]]; then
+                # This is a feature branch
+                echo 'export BUILDNO="'$CIRCLE_BUILD_NUM+${CIRCLE_BRANCH#*/}'"' >> "$BASH_ENV"
+            else
+                # This is a simple development build
+                echo 'export BUILDNO="'$CIRCLE_BUILD_NUM'"' >> "$BASH_ENV"
+            fi
+      - run:
+          name: Generate egg-info
+          command: |
+            source venv/bin/activate
+            pip install -e .
+            inv egg_info
+            ls udata_front.egg-info
       - save_cache:
           key: py-cache-v16-{{ arch }}-{{ .Branch }}
           paths:
@@ -118,6 +142,8 @@ jobs:
        BASH_ENV: /root/.bashrc
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Compute JS dependencies key
           command: cat .nvmrc package.json > js.deps
@@ -140,6 +166,10 @@ jobs:
           key: js-cache-{{ arch }}-{{ .Branch }}
           paths:
           - node_modules
+      - run:
+          name: Install udata-front
+          command: |
+            pip install -e .
       - run:
           name: Compile assets
           command: |
@@ -293,7 +323,13 @@ workflows:
   version: 2
   build:
     jobs:
+      - set_buildno:
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
       - deps:
+          requires:
+            - set_buildno
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
@@ -304,6 +340,8 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
       - assets:
+          requires:
+            - set_buildno
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/

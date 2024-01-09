@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { DatasetCard, type DatasetV2, Pagination, ResourceAccordion, type Resource, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip, Well } from "../src";
+import { DatasetCard, type DatasetV2, InformationPanel, Pagination, ResourceAccordion, type Resource, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip, Well } from "../src";
 import editIcon from "../../templates/svg/illustrations/edit.svg";
+import { ref } from "vue";
 
 const resource: Resource = {
   checksum: {type: "sha1", value: "54d0f3a4847c546c1cc4865f5ca54a1f8fc3f9af"},
@@ -53,7 +54,7 @@ test.. test... test..... test?..... test!....
   url: "https://static.data.gouv.fr/resources/indice-de-reparabilite-organisation-ribimex/20231115-104022/data.csv"
 };
 
-const resourceWithoutSchema: Resource = {
+const resourceWithoutSchema = ref<Resource>({
   checksum: {type: "sha1", value: "54d0f3a4847c546c1cc4865f5ca54a1f8fc3f9af"},
   created_at: "2023-11-15T10:40:22.288000+00:00",
   description: ``,
@@ -75,7 +76,8 @@ const resourceWithoutSchema: Resource = {
   owner: { id: "someId", first_name: "john", last_name: "Doe" },
   organization: null,
   url: "https://static.data.gouv.fr/resources/indice-de-reparabilite-organisation-ribimex/20231115-104022/data.csv"
-};
+});
+
 const quality = {
   all_resources_available: false,
   dataset_description_quality: false,
@@ -89,6 +91,7 @@ const quality = {
   update_frequency: false,
   update_fulfilled_in_time: false,
 };
+
 const dataset : DatasetV2 = {
   id: "653a6afa18f9f98d2ffdadee",
   page: "https://demo.data.gouv.fr/fr/datasets/donnees-changement-climatique-sqr/",
@@ -103,6 +106,40 @@ const dataset : DatasetV2 = {
     href: "https://demo.data.gouv.fr/api/2/datasets/653a6afa18f9f98d2ffdadee/resources/?page=1&page_size=50",
     total: 0,
     type: "GET"
+  },
+  harvest: {
+    backend: "OpenDataSoft",
+    modified_at: "2023-10-22T23:07:04.601000+00:00",
+    source_id: "5cd454758b4c4139d85b64f2",
+    remote_id: "prix-carburants-fichier-instantane-test-ods-copie",
+    domain: "data.economie.gouv.fr",
+    last_update: "2023-10-23T00:11:46.796000+00:00",
+    remote_url: "https://data.economie.gouv.fr/explore/dataset/prix-carburants-fichier-instantane-test-ods-copie/",
+    archived_at: "2023-10-31T00:24:10.854000+00:00",
+    archived: "not-on-remote",
+    ods_url: "https://data.economie.gouv.fr/explore/dataset/prix-carburants-fichier-instantane-test-ods-copie/",
+    ods_references: "https://donnees.roulez-eco.fr/opendata/instantane",
+    ods_has_records: true,
+    ods_geo: true
+  },
+  spatial: {
+    geom: null,
+    zones: [],
+    granularity: "other"
+  },
+  extras: {
+    datagouv_ckan_id: "24e8dd4f-bc04-4568-8833-b2e252109ee1",
+    datagouv_ckan_last_sync: 1410861521,
+    "recommendations-reuses": [
+      {
+        "id": "635a9e6b04c1b9b37fb75a15",
+        "score": 50,
+        "source": "edito"
+      }
+    ],
+    "recommendations:sources": [
+      "edito"
+    ],
   },
   created_at: "2023-10-26T13:34:50.156000+00:00",
   last_modified: "2023-12-07T16:51:02.937000+00:00",
@@ -121,7 +158,6 @@ const dataset : DatasetV2 = {
   temporal_coverage: "Test",
   frequency_date: null,
   private: false,
-  spatial: null,
   badges: [],
   organization: {
     id: "some_id",
@@ -134,6 +170,10 @@ const dataset : DatasetV2 = {
     slug: "test-meteo-france",
     uri: "https://demo.data.gouv.fr/api/1/organizations/test-meteo-france/"
   }
+};
+const license = {
+  title: "Licence Ouverte",
+  url: "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf"
 }
 </script>
 
@@ -206,4 +246,5 @@ const dataset : DatasetV2 = {
     organization-url=""
     style="z-index: 1;"
   />
+  <InformationPanel :dataset="dataset" :license="license" />
 </template>

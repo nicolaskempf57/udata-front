@@ -1,4 +1,5 @@
 import AppLink from "./AppLink/AppLink.vue";
+import InformationPanel from "./InformationPanel";
 import OrganizationNameWithCertificate from "./Organization";
 import { DatasetCard } from "./DatasetCard";
 import { ResourceAccordion, Loader as ResourceAccordionLoader } from "./ResourceAccordion";
@@ -13,4 +14,4 @@ import { QualityComponentInline } from "./QualityComponentInline"
 import { ReadMore } from "./ReadMore"
 import Well from "./Well";
 
-export { AppLink, DatasetCard, OrganizationNameWithCertificate, Pagination, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip, Well };
+export { AppLink, DatasetCard, InformationPanel, OrganizationNameWithCertificate, Pagination, QualityComponent, QualityComponentInline, QualityItem, QualityItemWarning, QualityScore, ReadMore, ResourceAccordion, ResourceAccordionLoader, ToggleTip, Well };
