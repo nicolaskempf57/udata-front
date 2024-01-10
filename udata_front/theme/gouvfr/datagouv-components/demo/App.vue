@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type DatasetV2, InformationPanel, ResourceAccordion } from "../src";
 import { ref } from "vue";
-import type { Resource } from "../src";
+import type { License, Resource } from "../src";
 
 const resource = ref<Resource>({
     checksum: {type: "sha1", value: "54d0f3a4847c546c1cc4865f5ca54a1f8fc3f9af"},
@@ -121,7 +121,6 @@ test.. test... test..... test?..... test!....
       ods_geo: true
     },
     spatial: {
-      geom: null,
       zones: [],
       granularity: "other"
     },
@@ -156,9 +155,17 @@ test.. test... test..... test?..... test!....
       uri: "https://demo.data.gouv.fr/api/1/organizations/test-meteo-france/"
     }
   };
-  const license = {
+  const license : License = {
     title: "Licence Ouverte",
-    url: "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf"
+    url: "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf",
+    alternate_titles: [],
+    alternate_urls: [],
+    flags: [
+      "okd_compliant",
+      "domain_content"
+    ],
+    id: "cc-by",
+    maintainer: null,
   }
 </script>
 
