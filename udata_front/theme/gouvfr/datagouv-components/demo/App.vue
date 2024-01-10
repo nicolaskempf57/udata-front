@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DatasetCard, type DatasetV2, InformationPanel, Pagination, ResourceAccordion, type Resource, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip, Well } from "../src";
+import { DatasetCard, type DatasetV2, InformationPanel, type License, Pagination, ResourceAccordion, type Resource, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip, Well } from "../src";
 import editIcon from "../../templates/svg/illustrations/edit.svg";
 import { ref } from "vue";
 
@@ -123,7 +123,6 @@ const dataset : DatasetV2 = {
     ods_geo: true
   },
   spatial: {
-    geom: null,
     zones: [],
     granularity: "other"
   },
@@ -171,9 +170,18 @@ const dataset : DatasetV2 = {
     uri: "https://demo.data.gouv.fr/api/1/organizations/test-meteo-france/"
   }
 };
-const license = {
-  title: "Licence Ouverte",
-  url: "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf"
+
+const license : License = {
+    title: "Licence Ouverte",
+    url: "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf",
+    alternate_titles: [],
+    alternate_urls: [],
+    flags: [
+      "okd_compliant",
+      "domain_content"
+    ],
+    id: "cc-by",
+    maintainer: null,
 }
 </script>
 
