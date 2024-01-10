@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { type DatasetV2, InformationPanel, ResourceAccordion } from "../src";
+import { type DatasetV2, InformationPanel, License, Resource, ResourceAccordion } from "../src";
 import { ref } from "vue";
-import type { License, Resource } from "../src";
 
 const resource = ref<Resource>({
     checksum: {type: "sha1", value: "54d0f3a4847c546c1cc4865f5ca54a1f8fc3f9af"},

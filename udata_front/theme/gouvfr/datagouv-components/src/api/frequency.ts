@@ -18,5 +18,5 @@ export function fetchFrequencies(): Promise<Frequencies> {
     return frequenciesRequest;
   }
   return frequenciesRequest = api.get(getFrequenciesUrl())
-  .then((resp) => resp.data);
+    .then((resp) => resp.data);
 }
