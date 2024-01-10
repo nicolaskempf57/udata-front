@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <article v-if="props.dataset?.extras">
+    <article v-if="hasExtras()">
         <header
             class="fr-grid-row fr-grid-row--middle fr-pb-3w fr-mb-3w border-bottom border-default-grey"
             :class="{'border-bottom': !extrasExpanded}"
@@ -148,7 +148,7 @@
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted } from 'vue';
-import { Dataset } from "../../types/datasets";
+import { Dataset, DatasetV2 } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
 import { templateRef } from "@vueuse/core";
@@ -162,7 +162,7 @@ import { Granularities } from '../../types/granularity';
 import { License } from '../../types/licenses';
 
 const props = defineProps<{
-    dataset: Dataset,
+    dataset: DatasetV2 | Dataset,
     license: License
 }>();
 const embedText = useOEmbed('dataset', props.dataset.id);
@@ -178,11 +178,16 @@ const expand = () => {
     toggleAccordion(harvestRef.value, harvestExpanded.value);
   }
 }
+
 const extrasExpand = () => {
   extrasExpanded.value = !extrasExpanded.value;
   if(extrasRef.value) {
     toggleAccordion(extrasRef.value, extrasExpanded.value);
   }
+}
+
+const hasExtras = () => {
+    return Object.keys(props.dataset.extras).length > 0;
 }
 
 onMounted(() => {
