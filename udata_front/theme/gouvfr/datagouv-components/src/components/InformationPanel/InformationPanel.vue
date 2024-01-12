@@ -147,7 +147,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import type { Dataset, DatasetV2 } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
