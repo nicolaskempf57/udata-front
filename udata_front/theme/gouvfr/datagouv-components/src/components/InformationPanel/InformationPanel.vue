@@ -61,7 +61,7 @@
         <div class="fr-text--sm fr-m-0">
             <h3 class="subtitle fr-mb-1v">{{ $t('Integrate on your website') }}</h3>
             <div class="embed-wrapper">
-                <textarea readonly="true" id="embed-copy" rows="1" v-model="embedText" onclick="this.select();"></textarea>
+                <textarea ref="textAreaRef" readonly="true" rows="1" v-model="embedText" @click="selectContent"></textarea>
                 <CopyButton class="fr-my-1w fr-mr-1w" :text="embedText"/>
             </div>
         </div>
@@ -153,7 +153,7 @@ import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
 import { formatDate } from '../../helpers/index';
 import { getGranularity, fetchGranularities } from '../../api/granularity';
-import { getFrequencies, fetchFrequencies } from '../../api/frequency';
+import { getFrequencies, fetchFrequencies } from '../../api/frequency';
 import useOEmbed from '../../composables/useEmbed'
 import type { Frequencies } from '../../types/frequency';
 import type { Granularities } from '../../types/granularity';
@@ -170,6 +170,14 @@ const granularities = ref<Granularities>([]);
 const frequencies = ref<Frequencies>([]);
 const harvestExpanded = ref(false);
 const harvestRef = ref(null);
+const textAreaRef = ref<HTMLTextAreaElement>();
+
+const selectContent = () => {
+  if (textAreaRef.value) {
+    textAreaRef.value.select();
+  }
+};
+
 const expand = () => {
   harvestExpanded.value = !harvestExpanded.value;
   if(harvestRef.value) {
