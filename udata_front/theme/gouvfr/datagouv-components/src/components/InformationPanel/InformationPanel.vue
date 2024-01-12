@@ -170,7 +170,7 @@ const granularities = ref<Granularities>([]);
 const frequencies = ref<Frequencies>([]);
 const harvestExpanded = ref(false);
 const harvestRef = ref(null);
-const textAreaRef = ref<HTMLTextAreaElement>();
+const textAreaRef = ref<HTMLTextAreaElement | null>(null);
 
 const selectContent = () => {
   if (textAreaRef.value) {
