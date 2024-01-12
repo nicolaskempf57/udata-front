@@ -193,10 +193,3 @@ onMounted(() => {
   fetchFrequencies().then(foundFrequencies => frequencies.value = foundFrequencies);
  });
 </script>
-
-<style scoped>
-.embed {
-    height: 45px;
-    overflow-y: hidden;
-}
-</style>
