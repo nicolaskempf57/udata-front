@@ -197,5 +197,6 @@ onMounted(() => {
 <style scoped>
 .embed {
     height: 45px;
+    overflow-y: hidden;
 }
 </style>
