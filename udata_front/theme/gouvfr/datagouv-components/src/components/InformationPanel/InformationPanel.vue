@@ -61,7 +61,7 @@
         <div class="fr-text--sm fr-m-0">
             <h3 class="subtitle fr-mb-1v">{{ $t('Integrate on your website') }}</h3>
             <div class="embed-wrapper">
-                <textarea readonly="true" id="embed-copy" rows="1" v-model="embedText" onclick="this.select();"></textarea>
+                <textarea ref="textAreaRef" readonly="true" rows="1" v-model="embedText" @click="selectContent"></textarea>
                 <CopyButton class="fr-my-1w fr-mr-1w" :text="embedText"/>
             </div>
         </div>
@@ -147,19 +147,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, onMounted } from 'vue';
-import { Dataset, DatasetV2 } from "../../types/datasets";
+import { ref, onMounted } from 'vue';
+import type { Dataset, DatasetV2 } from "../../types/datasets";
 import CopyButton from "../CopyButton/CopyButton.vue";
 import { toggleAccordion } from "../../helpers/toggleAccordion";
-import { templateRef } from "@vueuse/core";
 import { formatDate } from '../../helpers/index';
 import { getGranularity, fetchGranularities } from '../../api/granularity';
-import { getFrequencies, fetchFrequencies } from '../../api/frequency';
+import { getFrequencies, fetchFrequencies } from '../../api/frequency';
 import useOEmbed from '../../composables/useEmbed'
-import { Ref } from 'vue';
-import { Frequencies } from '../../types/frequency';
-import { Granularities } from '../../types/granularity';
-import { License } from '../../types/licenses';
+import type { Frequencies } from '../../types/frequency';
+import type { Granularities } from '../../types/granularity';
+import type { License } from '../../types/licenses';
 
 const props = defineProps<{
     dataset: DatasetV2 | Dataset,
@@ -167,11 +165,19 @@ const props = defineProps<{
 }>();
 const embedText = useOEmbed('dataset', props.dataset.id);
 const extrasExpanded = ref(false);
-const extrasRef = templateRef<HTMLElement | null>("extrasRef");
-const granularities: Ref<Granularities> = ref([]);
-const frequencies: Ref<Frequencies> = ref([]);
+const extrasRef = ref(null);
+const granularities = ref<Granularities>([]);
+const frequencies = ref<Frequencies>([]);
 const harvestExpanded = ref(false);
-const harvestRef = templateRef<HTMLElement | null>("harvestRef");
+const harvestRef = ref(null);
+const textAreaRef = ref<HTMLTextAreaElement | null>(null);
+
+const selectContent = () => {
+  if (textAreaRef.value) {
+    textAreaRef.value.select();
+  }
+};
+
 const expand = () => {
   harvestExpanded.value = !harvestExpanded.value;
   if(harvestRef.value) {

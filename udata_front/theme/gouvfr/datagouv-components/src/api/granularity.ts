@@ -2,7 +2,7 @@ import { getLocalizedUrl } from "../helpers/i18n";
 import { type Granularities } from "../types/granularity";
 import { api } from "./api";
 
-let granularitiesRequest: Promise<Granularities>
+let granularitiesRequest: Promise<Granularities>;
 
 export function getGranularity(granularities: Granularities, id: string): string | null {
   const granularity = granularities.find((g: any) => g.id === id);
