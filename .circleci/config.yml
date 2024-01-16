@@ -83,9 +83,6 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: "What was my custom environment variable?"
-          command: echo ${BUILDNO}
-      - run:
           name: Install python dependencies
           command: |
             source venv/bin/activate
@@ -109,12 +106,14 @@ jobs:
                 echo 'export BUILDNO="'$CIRCLE_BUILD_NUM'"' >> "$BASH_ENV"
             fi
       - run:
+          name: Save BUILDNO to file
+          command: |
+            cp $BASH_ENV bash.env
+      - run:
           name: Generate egg-info
           command: |
             source venv/bin/activate
-            pip install -e .
-            inv egg_info
-            ls udata_front.egg-info
+            inv egg-info --buildno ${BUILDNO}
       - save_cache:
           key: py-cache-v16-{{ arch }}-{{ .Branch }}
           paths:
@@ -133,6 +132,8 @@ jobs:
           root: .
           paths:
           - venv
+          - udata_front.egg-info
+          - bash.env
 
   assets:
     docker:
@@ -166,10 +167,6 @@ jobs:
           key: js-cache-{{ arch }}-{{ .Branch }}
           paths:
           - node_modules
-      - run:
-          name: Install udata-front
-          command: |
-            pip install -e .
       - run:
           name: Compile assets
           command: |
@@ -230,6 +227,14 @@ jobs:
             pip install --force-reinstall --no-deps -r requirements/udata.in
             pip install -e .
       - run:
+          name: load BUILDNO
+          command: |
+            cat bash.env >> $BASH_ENV
+      - run:
+          name: Generate egg-info
+          command: |
+            python setup.py egg_info --tag-build ${BUILDNO}
+      - run:
           name: Prepare udata.cfg file with udata-front plugin
           command: cp cypress/udata-front-e2e.cfg.example cypress/udata-front-e2e.cfg
       - run:
@@ -260,6 +265,14 @@ jobs:
             pip install --force-reinstall --no-deps -r requirements/udata.in
             pip install -e .
             udata generate-fixtures
+      - run:
+          name: load BUILDNO
+          command: |
+            cat bash.env >> $BASH_ENV
+      - run:
+          name: Generate egg-info
+          command: |
+            python setup.py egg_info --tag-build ${BUILDNO}
       - run:
           name: Install lighthouse
           command: sudo npm install -g @lhci/cli@0.10.x
@@ -323,13 +336,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - set_buildno:
-          filters:
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*/
       - deps:
-          requires:
-            - set_buildno
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
@@ -341,7 +348,7 @@ workflows:
               only: /v[0-9]+(\.[0-9]+)*/
       - assets:
           requires:
-            - set_buildno
+            - python
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
@@ -353,6 +360,7 @@ workflows:
           requires:
             - deps
             - assets
+            - python
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/

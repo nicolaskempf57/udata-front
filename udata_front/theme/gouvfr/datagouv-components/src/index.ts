@@ -9,6 +9,7 @@ import { setupI18n, setupI18nWithExistingInstance } from './helpers/i18n';
 import { getRandomId } from "@gouvminint/vue-dsfr";
 
 export type { Badge, Badges, Dataset, DatasetV2, License, NewDataset, Organization, Owned, Quality, Rel, Resource, User };
+export * from "./api";
 export * from "./components";
 export * from "./composables";
 export * from "./config";
