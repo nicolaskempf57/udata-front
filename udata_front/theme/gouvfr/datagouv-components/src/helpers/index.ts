@@ -1,7 +1,8 @@
-import { dayjs } from "./i18n";
-import { useI18n } from "vue-i18n";
-import markdown from "./markdown";
 import RemoveMarkdown from "remove-markdown";
+import { useI18n } from "vue-i18n";
+import { dayjs } from "./i18n";
+import markdown from "./markdown";
+import { toggleAccordion } from "./toggleAccordion";
 
 export const filesize = (val: number) => {
   const { t } = useI18n();
@@ -62,4 +63,4 @@ export const excerpt = (val: string, length = 300) => {
   return truncate(RemoveMarkdown(val), length);
 };
 
-export { markdown };
+export { markdown, toggleAccordion };
