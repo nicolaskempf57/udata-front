@@ -1,8 +1,8 @@
 <template>
-    <div class="fr-py-3w fr-mb-3w border-bottom border-default-grey">  
+    <div class="fr-py-3w fr-mb-3w border-bottom border-default-grey">
         <h2 class="subtitle subtitle--uppercase">{{ $t('Informations') }}</h2>
         <div class="fr-text--sm fr-m-0">
-            <div class="fr-grid-row fr-grid-row--gutters">     
+            <div class="fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('License') }}</h3>
                     <p class="fr-text--sm fr-m-0 text-mention-grey ">
@@ -10,9 +10,9 @@
                             <a :href="props.license.url">
                             {{ props.license.title }}
                             </a>
-                        </code>            
+                        </code>
                     </p>
-                </div>              
+                </div>
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">ID</h3>
                     <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ props.dataset.id }}</p>
@@ -23,11 +23,11 @@
     <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
         <h2 class="subtitle subtitle--uppercase">{{ $t('Temporality') }}</h2>
         <div class="fr-text--sm fr-m-0">
-            <div class="fr-grid-row fr-grid-row--gutters">   
+            <div class="fr-grid-row fr-grid-row--gutters">
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Creation') }}</h3>
                     <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ formatDate(props.dataset.created_at) }}</p>
-                </div>                  
+                </div>
                 <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Frequency') }}</h3>
                     <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ getFrequencies(frequencies, props.dataset.frequency) }}</p>
@@ -52,12 +52,12 @@
                 <div v-if="props.dataset.spatial?.granularity" class="fr-col-12 fr-col-sm-6 fr-col-md-4">
                     <h3 class="subtitle fr-mb-1v">{{ $t('Granularity of territorial coverage') }}</h3>
                     <p class="fr-text--sm fr-m-0 text-mention-grey ">{{ getGranularity(granularities, props.dataset.spatial?.granularity) }}</p>
-                </div>                  
+                </div>
             </div>
         </div>
     </div>
     <div class="fr-pb-3w fr-mb-3w border-bottom border-default-grey">
-        <h2 class="subtitle subtitle--uppercase">Actions</h2>
+        <h2 class="subtitle subtitle--uppercase">{{ $t('Actions') }}</h2>
         <div class="fr-text--sm fr-m-0">
             <h3 class="subtitle fr-mb-1v">{{ $t('Integrate on your website') }}</h3>
             <div class="embed-wrapper">
