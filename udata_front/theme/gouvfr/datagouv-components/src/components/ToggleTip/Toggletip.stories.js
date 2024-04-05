@@ -1,4 +1,4 @@
-import Toggletip from './Toggletip.vue';
+import { Toggletip } from '.';
 
 export default {
   title: 'Components/Toggletip',

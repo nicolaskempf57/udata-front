@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DatasetCard, type DatasetV2, InformationPanel, type License, Pagination, ResourceAccordion, type Resource, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, ToggleTip, Well } from "../src";
+import { DatasetCard, type DatasetV2, InformationPanel, type License, Pagination, ResourceAccordion, type Resource, QualityComponent, QualityComponentInline, QualityItem, QualityScore, ReadMore, Toggletip, Well } from "../src";
 import editIcon from "../../templates/svg/illustrations/edit.svg";
 import { ref } from "vue";
 
@@ -194,7 +194,7 @@ const license : License = {
   <Pagination class="fr-mt-3v" :total-results="52" @change="p => console.log(p)" />
   <QualityScore :score="0.5" class="w-100"></QualityScore>
   <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
-  <ToggleTip>
+  <Toggletip>
     Toggle
     <template #toggletip>
       <h5 class="fr-text--sm fr-my-0">
@@ -202,7 +202,7 @@ const license : License = {
       </h5>
       <QualityItem :passed="true" message-passed="Oui" message-failed="Non"></QualityItem>
     </template>
-  </ToggleTip>
+  </Toggletip>
   <QualityComponent
     :quality="quality"
   ></QualityComponent>
